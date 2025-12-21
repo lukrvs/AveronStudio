@@ -291,22 +291,14 @@ nav a:hover {
     font-size: 18px;
 }
 
+/* Alle Links lila */
 #contact a {
-    color: #00ffcc;
+    color: #a64ca6;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 #contact a:hover {
-    color: #0099ff;
-}
-
-/* Twitch-Link lila */
-#contact a[href*="twitch.tv"] {
-    color: #a64ca6;
-}
-
-#contact a[href*="twitch.tv"]:hover {
     color: #d177d1;
 }
 
