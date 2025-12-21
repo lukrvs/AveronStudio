@@ -50,15 +50,6 @@ nav a:hover {
    Hero-Sektion
 ============================== */
 #hero {
-    background: linear-gradient(120deg,#111,#222);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
-#hero {
     position: relative;
     height: 100vh;
     display: flex;
@@ -71,7 +62,7 @@ nav a:hover {
 
     /* Bild-Hintergrund */
     background: url('hero-background.jpg') center/cover no-repeat;
-    
+
     /* Cinematic Animation */
     animation: heroZoom 20s ease-in-out infinite alternate;
 }
@@ -91,6 +82,7 @@ nav a:hover {
         transform: scale(1.05) translateY(-20px);
     }
 }
+
 /* Optional: leichte Partikel Animation */
 #hero::before {
     content: "";
@@ -115,9 +107,13 @@ nav a:hover {
 #hero h2, #hero p {
     position: relative;
     z-index: 1;
-}
+    text-shadow:
+        0 0 10px rgba(0, 255, 255, 0.6),
+        0 0 20px rgba(255, 100, 200, 0.4),
+        0 0 30px rgba(0, 255, 255, 0.3);
 }
 
+/* Hero Text Animation */
 #hero h2 {
     font-size: 60px;
     color: #00ffcc;
@@ -133,14 +129,6 @@ nav a:hover {
     opacity: 0;
     transform: translateY(50px);
     animation: heroFadeIn 1s ease forwards 1s;
-}
-/* Hero Text Glow */
-#hero h2, #hero p {
-    text-shadow:
-        0 0 10px rgba(0, 255, 255, 0.6),
-        0 0 20px rgba(255, 100, 200, 0.4),
-        0 0 30px rgba(0, 255, 255, 0.3);
-}
 }
 
 @keyframes heroFadeIn {
@@ -218,12 +206,14 @@ nav a:hover {
     font-weight: bold;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5), 0 0 30px rgba(255,100,200,0.3);
 }
 
 .game-card:hover .play-btn {
     opacity: 1;
     transform: translateY(0) scale(1.1);
+    box-shadow: 0 0 30px rgba(0,255,255,0.7), 0 0 50px rgba(255,100,200,0.5);
 }
 
 /* ==============================
@@ -362,5 +352,3 @@ footer {
         font-size: 18px;
     }
 }
-
-
