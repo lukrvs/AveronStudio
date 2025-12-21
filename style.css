@@ -91,6 +91,31 @@ nav a:hover {
         transform: scale(1.05) translateY(-20px);
     }
 }
+/* Optional: leichte Partikel Animation */
+#hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 5px 5px;
+    pointer-events: none;
+    animation: moveParticles 10s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moveParticles {
+    0% {background-position: 0 0;}
+    100% {background-position: 100px 100px;}
+}
+
+/* Hero Text über Partikel */
+#hero h2, #hero p {
+    position: relative;
+    z-index: 1;
+}
 }
 
 #hero h2 {
@@ -108,6 +133,14 @@ nav a:hover {
     opacity: 0;
     transform: translateY(50px);
     animation: heroFadeIn 1s ease forwards 1s;
+}
+/* Hero Text Glow */
+#hero h2, #hero p {
+    text-shadow:
+        0 0 10px rgba(0, 255, 255, 0.6),
+        0 0 20px rgba(255, 100, 200, 0.4),
+        0 0 30px rgba(0, 255, 255, 0.3);
+}
 }
 
 @keyframes heroFadeIn {
@@ -329,4 +362,5 @@ footer {
         font-size: 18px;
     }
 }
+
 
