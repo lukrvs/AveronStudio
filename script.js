@@ -60,14 +60,16 @@ cards.forEach(card => {
 // Sprachumschaltung
 // ==============================
 const languageSelect = document.getElementById('languageSelect');
-const translatableElements = document.querySelectorAll('[data-de]');
 const loginModal = document.getElementById('loginModal');
 const loginForm = document.getElementById('loginForm');
 const loginMessage = document.getElementById('loginMessage');
 const closeBtn = loginModal.querySelector('.close-btn');
 
+// Alle Texte außerhalb Login Modal
+const translatableElements = document.querySelectorAll('body :not(#loginModal) [data-de]');
+
 function translatePage(lang) {
-    // Alle Texte mit data-* übersetzen
+    // Alle Texte außerhalb des Login-Modals übersetzen
     translatableElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
@@ -80,6 +82,7 @@ function translatePage(lang) {
         if(text) el.textContent = text;
     });
 
+    // Fehlermeldung zurücksetzen
     loginMessage.textContent = '';
 }
 
