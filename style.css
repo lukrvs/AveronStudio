@@ -10,7 +10,7 @@
 
 body {
     background: #1e1e1e;
-    color: #a64ca6;
+    color: #f0f0f0; /* Textfarbe wieder neutral */
     line-height: 1.6;
 }
 
@@ -45,17 +45,4 @@ nav a:hover {
     color: #00ffcc;
 }
 
-/* ==============================
-   Hero-Sektion
-============================== */
-#hero {
-    background: linear-gradient(120deg,#111,#222);
-    padding: 120px 20px;
-    text-align: center;
-}
-
-#hero h2 {
-    font-size: 50px;
-    margin-bottom: 20px;
-    color: #00f
-
+/
