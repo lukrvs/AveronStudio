@@ -103,8 +103,19 @@ languageSelect.addEventListener('change', (e) => {
 // ==============================
 const closeBtn = loginModal.querySelector('.close-btn');
 
+// Öffnen des Login-Modals
 function openLogin() {
-    const lang = languageSelect.value;
+    const lang = languageSelect.value; // aktuelle Sprache
+    loginElements.forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if(text) el.textContent = text;
+    });
+    loginMessage.textContent = ""; // Fehlermeldung zurücksetzen
+
+    loginModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
 
     // Texte beim Öffnen übersetzen
     const loginElements = loginModal.querySelectorAll('[data-de]');
@@ -175,4 +186,5 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
+
 
