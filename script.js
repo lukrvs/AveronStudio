@@ -64,40 +64,41 @@ cards.forEach(card => {
 const languageSelect = document.getElementById('languageSelect');
 const translatableElements = document.querySelectorAll('[data-de]');
 const loginModal = document.getElementById('loginModal');
-const loginElements = loginModal.querySelectorAll('[data-de]');
 const loginForm = document.getElementById('loginForm');
 const loginMessage = document.getElementById('loginMessage');
 const closeBtn = loginModal.querySelector('.close-btn');
 
 function translatePage(lang) {
-    // Normale Seite
+    // Normale Texte
     translatableElements.forEach(el => {
         if(el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    // Login Modal
+    // Login Modal Texte
+    const loginElements = loginModal.querySelectorAll('[data-de]');
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
+    // Fehlermeldung zurücksetzen
     loginMessage.textContent = '';
 }
 
 // Standard: Deutsch
 translatePage('de');
 
-// Sprache wechseln
-languageSelect.addEventListener('change', e => translatePage(e.target.value));
+// Event: Sprache wechseln
+languageSelect.addEventListener('change', (e) => translatePage(e.target.value));
 
 // ==============================
-// Login Modal öffnen
+// Login Modal Funktion
 // ==============================
 function openLogin() {
     const lang = languageSelect.value;
-
+    const loginElements = loginModal.querySelectorAll('[data-de]');
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
@@ -108,22 +109,22 @@ function openLogin() {
     document.body.style.overflow = 'hidden';
 }
 
-// Login Modal schließen
 closeBtn.addEventListener('click', () => {
     loginModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
-window.addEventListener('click', e => {
-    if(e.target === loginModal){
+
+window.addEventListener('click', (e) => {
+    if(e.target === loginModal) {
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 });
 
 // ==============================
-// Login Formular
+// Login-Formular
 // ==============================
-loginForm.addEventListener('submit', e => {
+loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
@@ -142,7 +143,7 @@ loginForm.addEventListener('submit', e => {
         fr: "Connexion réussie !",
         es: "¡Inicio de sesión correcto!",
         ch: "Login erfolgreich!"
-    }[lang];
+    };
 
     const errorText = {
         de: "Falscher Benutzername oder Passwort!",
@@ -157,17 +158,15 @@ loginForm.addEventListener('submit', e => {
         fr: "Nom d'utilisateur ou mot de passe incorrect !",
         es: "¡Nombre de usuario o contraseña incorrectos!",
         ch: "Falscher Benutzername oder Passwort!"
-    }[lang];
+    };
 
-    if(username === "test" && password === "1234"){
-        loginMessage.textContent = successText;
+    if(username === "test" && password === "1234") {
+        loginMessage.textContent = successText[lang];
         loginMessage.style.color = "#00ffcc";
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     } else {
-        loginMessage.textContent = errorText;
+        loginMessage.textContent = errorText[lang];
         loginMessage.style.color = "#ff4c4c";
     }
 });
-
-
