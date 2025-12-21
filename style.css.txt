@@ -11,6 +11,24 @@ header {
     padding: 20px;
     display: flex;
     justify-content: space-between;
+ /* Grundstil */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+}
+
+header {
+    background-color: #111;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -51,6 +69,7 @@ section {
     border-radius: 10px;
     width: 200px;
     transition: transform 0.3s;
+    text-align: center;
 }
 
 .game-card:hover {
@@ -62,17 +81,20 @@ section {
     border-radius: 5px;
 }
 
-button {
+button, .play-btn {
+    display: inline-block;
     margin-top: 10px;
     padding: 10px;
-    border: none;
     background-color: #00ffcc;
     color: #111;
-    cursor: pointer;
     border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
 }
 
-button:hover {
+button:hover, .play-btn:hover {
     background-color: #00ddb3;
 }
 

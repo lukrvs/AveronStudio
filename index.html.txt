@@ -24,18 +24,17 @@
     <section id="spiele">
         <h2>Meine Spiele</h2>
         <div class="game-grid">
+
+            <!-- Nightveil -->
             <div class="game-card">
-                <img src="spiel1.jpg" alt="Spiel 1">
-                <h3>Spiel 1</h3>
-                <p>Kurze Beschreibung von Spiel 1.</p>
-                <button>Play</button>
+                <img src="nightveil_poster.jpg" alt="Nightveil Poster">
+                <h3>Nightveil</h3>
+                <p>Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung.</p>
+                <a href="#" class="play-btn">Jetzt spielen</a>
             </div>
-            <div class="game-card">
-                <img src="spiel2.jpg" alt="Spiel 2">
-                <h3>Spiel 2</h3>
-                <p>Kurze Beschreibung von Spiel 2.</p>
-                <button>Play</button>
-            </div>
+
+            <!-- Weitere Spiele können hier später hinzugefügt werden -->
+
         </div>
     </section>
 
