@@ -124,8 +124,6 @@ function openLogin() {
     document.body.style.overflow = 'hidden';
 }
 
-}
-
 // Schließen des Modals
 closeBtn.addEventListener('click', () => {
     loginModal.style.display = 'none';
@@ -173,6 +171,7 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
+
 
 
 
