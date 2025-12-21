@@ -1,4 +1,4 @@
-on <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -10,44 +10,61 @@ on <!DOCTYPE html>
 <header>
     <h1>Averon Studio</h1>
     <nav>
-        <a href="#spiele">Spiele</a>
-        <a href="#about">Über mich</a>
-        <a href="#contact">Kontakt</a>
+        <a href="#spiele" data-de="Spiele" data-en="Games" data-hu="Játékok" data-at="Spüehle" data-ru="Игры" data-ja="ゲーム" data-pl="Gry" data-zh="游戏" data-it="Giochi" data-fr="Jeux" data-es="Juegos" data-ch="Spile">Spiele</a>
+        <a href="#about" data-de="Über mich" data-en="About Me" data-hu="Rólam" data-at="Über mi" data-ru="Обо мне" data-ja="私について" data-pl="O mnie" data-zh="关于我" data-it="Su di me" data-fr="À propos" data-es="Sobre mí" data-ch="Über mi">Über mich</a>
+        <a href="#contact" data-de="Kontakt" data-en="Contact" data-hu="Kapcsolat" data-at="Kontakt" data-ru="Контакты" data-ja="連絡先" data-pl="Kontakt" data-zh="联系" data-it="Contatto" data-fr="Contact" data-es="Contacto" data-ch="Kontakt">Kontakt</a>
     </nav>
+    <!-- Sprachwahl -->
+    <select id="languageSelect">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="at">Österreichisch (Dialekt)</option>
+        <option value="ch">Schweizer Deutsch</option>
+        <option value="hu">Ungarisch</option>
+        <option value="ru">Русский (Russisch)</option>
+        <option value="ja">日本語 (Japanisch)</option>
+        <option value="pl">Polski (Polnisch)</option>
+        <option value="zh">中文 (Chinesisch)</option>
+        <option value="it">Italiano (Italienisch)</option>
+        <option value="fr">Français (Französisch)</option>
+        <option value="es">Español (Spanisch)</option>
+    </select>
 </header>
 
 <section id="hero">
-    <h2>Willkommen in meiner Spielewelt!</h2>
-    <p>Hier siehst du alle meine Projekte und Spiele.</p>
+    <h2 data-de="Willkommen in meiner Spielewelt!" data-en="Welcome to my games world!" data-hu="Üdvözlünk a játékaim világában!" data-at="Willkommen in meiner Spielewelt!" data-ru="Добро пожаловать в мой игровой мир!" data-ja="私のゲームの世界へようこそ!" data-pl="Witamy w moim świecie gier!" data-zh="欢迎来到我的游戏世界！" data-it="Benvenuti nel mio mondo di giochi!" data-fr="Bienvenue dans mon univers de jeux !" data-es="¡Bienvenido a mi mundo de juegos!" data-ch="Willkomme i minere Spielewelt!">Willkommen in meiner Spielewelt!</h2>
+    <p data-de="Hier siehst du alle meine Projekte und Spiele." data-en="Here you can see all my projects and games." data-hu="Itt láthatod az összes projektemet és játékomat." data-at="Hier siehst du alle meine Projekte und Spiele." data-ru="Здесь вы можете увидеть все мои проекты и игры." data-ja="ここでは私のすべてのプロジェクトとゲームを見ることができます。" data-pl="Tutaj możesz zobaczyć wszystkie moje projekty i gry." data-zh="在这里你可以看到我所有的项目和游戏。" data-it="Qui puoi vedere tutti i miei progetti e giochi." data-fr="Ici, vous pouvez voir tous mes projets et jeux." data-es="Aquí puedes ver todos mis proyectos y juegos." data-ch="Da siehsch alli mini Projekte und Spiele.">Hier siehst du alle meine Projekte und Spiele.</p>
 </section>
 
 <section id="spiele">
-    <h2>Meine Spiele</h2>
+    <h2 data-de="Meine Spiele" data-en="My Games">Meine Spiele</h2>
     <div class="game-grid">
-
         <!-- Nightveil Karte -->
         <a href="#" class="game-card">
             <img src="nightveil_poster.jpg" alt="Nightveil Poster">
-            <h3>Nightveil</h3>
-            <p>Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung.</p>
-            <span class="play-btn">Jetzt spielen</span>
+            <h3 data-de="Nightveil" data-en="Nightveil">Nightveil</h3>
+            <p data-de="Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung."
+               data-en="Anime horror game: Creepy lobby, friends wait and explore the dark environment.">
+               Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung.
+            </p>
+            <span class="play-btn" data-de="Jetzt spielen" data-en="Play now">Jetzt spielen</span>
         </a>
-
     </div>
 </section>
 
 <section id="about">
-    <h2>Über mich</h2>
-    <p>Ich programmiere Spiele und erstelle eigene Projekte.</p>
+    <h2 data-de="Über mich" data-en="About Me">Über mich</h2>
+    <p data-de="Ich programmiere Spiele und erstelle eigene Projekte." data-en="I program games and create my own projects.">
+        Ich programmiere Spiele und erstelle eigene Projekte.
+    </p>
 </section>
 
 <section id="contact">
-    <h2>Kontakt</h2>
+    <h2 data-de="Kontakt" data-en="Contact">Kontakt</h2>
     <ul>
         <li>Discord: Luxxqei</li>
-<li>Twitch: <a href="https://twitch.tv/lukrvs" target="_blank">Lukrvs</a></li>
-<li>Instagram: <a href="https://instagram.com/lukrvs" target="_blank">@Lukrvs</a></li>
-
+        <li>Twitch: <a href="https://twitch.tv/lukrvs" target="_blank">@Lukrvs</a></li>
+        <li>Instagram: <a href="https://instagram.com/lukrvs" target="_blank">@Lukrvs</a></li>
     </ul>
 </section>
 
@@ -61,10 +78,22 @@ on <!DOCTYPE html>
 </div>
 
 <script src="script.js"></script>
+
+<!-- Mehrsprachigkeit Script -->
+<script>
+const languageSelect = document.getElementById('languageSelect');
+languageSelect.addEventListener('change', () => {
+    const lang = languageSelect.value; // z.B. 'de', 'en', 'ru', 'ja'...
+    document.querySelectorAll('[data-de]').forEach(el => {
+        if(el.dataset[lang]) {
+            el.textContent = el.dataset[lang];
+        }
+    });
+});
+</script>
+
 </body>
 </html>
-
-
 
 
 
