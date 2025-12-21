@@ -2,15 +2,11 @@
 // Scroll Animation für Spielkarten
 // ==============================
 const cards = document.querySelectorAll('.game-card');
-
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
+        if(entry.isIntersecting) entry.target.classList.add('visible');
     });
 }, { threshold: 0.2 });
-
 cards.forEach(card => observer.observe(card));
 
 // ==============================
@@ -68,73 +64,56 @@ cards.forEach(card => {
 const languageSelect = document.getElementById('languageSelect');
 const translatableElements = document.querySelectorAll('[data-de]');
 const loginModal = document.getElementById('loginModal');
+const loginElements = loginModal.querySelectorAll('[data-de]');
 const loginForm = document.getElementById('loginForm');
 const loginMessage = document.getElementById('loginMessage');
+const closeBtn = loginModal.querySelector('.close-btn');
 
 function translatePage(lang) {
-    // Normale Texte
+    // Normale Seite
     translatableElements.forEach(el => {
         if(el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    // Login Modal Texte
-    const loginElements = loginModal.querySelectorAll('[data-de]');
+    // Login Modal
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    // Fehlermeldung zurücksetzen
     loginMessage.textContent = '';
 }
 
 // Standard: Deutsch
 translatePage('de');
 
-// Event: Sprache wechseln
-languageSelect.addEventListener('change', (e) => {
-    translatePage(e.target.value);
-});
+// Sprache wechseln
+languageSelect.addEventListener('change', e => translatePage(e.target.value));
 
 // ==============================
-// Login Modal Funktion
+// Login Modal öffnen
 // ==============================
-const closeBtn = loginModal.querySelector('.close-btn');
-
-// Öffnen des Login-Modals
 function openLogin() {
-    const lang = languageSelect.value; // aktuelle Sprache
-    loginElements.forEach(el => {
-        const text = el.getAttribute('data-' + lang);
-        if(text) el.textContent = text;
-    });
-    loginMessage.textContent = ""; // Fehlermeldung zurücksetzen
+    const lang = languageSelect.value;
 
-    loginModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-
-    // Texte beim Öffnen übersetzen
-    const loginElements = loginModal.querySelectorAll('[data-de]');
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    loginMessage.textContent = "";
+    loginMessage.textContent = '';
     loginModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
+// Login Modal schließen
 closeBtn.addEventListener('click', () => {
     loginModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
-
-window.addEventListener('click', (e) => {
+window.addEventListener('click', e => {
     if(e.target === loginModal){
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
@@ -142,47 +121,51 @@ window.addEventListener('click', (e) => {
 });
 
 // ==============================
-// Login-Formular
+// Login Formular
 // ==============================
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', e => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
     const lang = languageSelect.value;
 
-    if(username === "test" && password === "1234") {
-        loginMessage.textContent = {
-            de: "Login erfolgreich!",
-            en: "Login successful!",
-            at: "Login erfolgreich!",
-            hu: "Sikeres bejelentkezés!",
-            ru: "Вход успешен!",
-            ja: "ログイン成功！",
-            pl: "Logowanie udane!",
-            zh: "登录成功！",
-            it: "Login riuscito!",
-            fr: "Connexion réussie !",
-            es: "¡Inicio de sesión correcto!",
-            ch: "Login erfolgreich!"
-        }[lang];
+    const successText = {
+        de: "Login erfolgreich!",
+        en: "Login successful!",
+        at: "Login erfolgreich!",
+        hu: "Sikeres bejelentkezés!",
+        ru: "Вход успешен!",
+        ja: "ログイン成功！",
+        pl: "Logowanie udane!",
+        zh: "登录成功！",
+        it: "Login riuscito!",
+        fr: "Connexion réussie !",
+        es: "¡Inicio de sesión correcto!",
+        ch: "Login erfolgreich!"
+    }[lang];
+
+    const errorText = {
+        de: "Falscher Benutzername oder Passwort!",
+        en: "Wrong username or password!",
+        at: "Falscher Benutzername oder Passwort!",
+        hu: "Hibás felhasználónév vagy jelszó!",
+        ru: "Неверное имя пользователя или пароль!",
+        ja: "ユーザー名またはパスワードが間違っています！",
+        pl: "Niepoprawna nazwa użytkownika lub hasło!",
+        zh: "用户名或密码错误！",
+        it: "Nome utente o password errati!",
+        fr: "Nom d'utilisateur ou mot de passe incorrect !",
+        es: "¡Nombre de usuario o contraseña incorrectos!",
+        ch: "Falscher Benutzername oder Passwort!"
+    }[lang];
+
+    if(username === "test" && password === "1234"){
+        loginMessage.textContent = successText;
         loginMessage.style.color = "#00ffcc";
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     } else {
-        loginMessage.textContent = {
-            de: "Falscher Benutzername oder Passwort!",
-            en: "Wrong username or password!",
-            at: "Falscher Benutzername oder Passwort!",
-            hu: "Hibás felhasználónév vagy jelszó!",
-            ru: "Неверное имя пользователя или пароль!",
-            ja: "ユーザー名またはパスワードが間違っています！",
-            pl: "Niepoprawna nazwa użytkownika lub hasło!",
-            zh: "用户名或密码错误！",
-            it: "Nome utente o password errati!",
-            fr: "Nom d'utilisateur ou mot de passe incorrect !",
-            es: "¡Nombre de usuario o contraseña incorrectos!",
-            ch: "Falscher Benutzername oder Passwort!"
-        }[lang];
+        loginMessage.textContent = errorText;
         loginMessage.style.color = "#ff4c4c";
     }
 });
