@@ -18,7 +18,6 @@ const lightboxImg = document.getElementById('lightbox-img');
 cards.forEach(card => {
     const img = card.querySelector('img');
     img.addEventListener('click', () => {
-        lightbox.classList.add('show');
         lightbox.style.display = 'flex';
         lightboxImg.src = img.src;
         document.body.style.overflow = 'hidden';
@@ -26,7 +25,6 @@ cards.forEach(card => {
 });
 
 lightbox.addEventListener('click', () => {
-    lightbox.classList.remove('show');
     lightbox.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
@@ -69,9 +67,8 @@ const loginMessage = document.getElementById('loginMessage');
 const closeBtn = loginModal.querySelector('.close-btn');
 
 function translatePage(lang) {
-    // Normale Texte
+    // Alle Texte mit data-* übersetzen
     translatableElements.forEach(el => {
-        if(el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
@@ -83,14 +80,13 @@ function translatePage(lang) {
         if(text) el.textContent = text;
     });
 
-    // Fehlermeldung zurücksetzen
     loginMessage.textContent = '';
 }
 
 // Standard: Deutsch
 translatePage('de');
 
-// Event: Sprache wechseln
+// Sprache wechseln
 languageSelect.addEventListener('change', (e) => translatePage(e.target.value));
 
 // ==============================
