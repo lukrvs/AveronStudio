@@ -58,6 +58,39 @@ nav a:hover {
     align-items: center;
     text-align: center;
     overflow: hidden;
+#hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    color: #f0f0f0;
+
+    /* Bild-Hintergrund */
+    background: url('hero-background.jpg') center/cover no-repeat;
+    
+    /* Cinematic Animation */
+    animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+/* Zoom-in und leichte Bewegung für Cinematic-Feeling */
+@keyframes heroZoom {
+    0% {
+        background-size: 100% auto;
+        transform: scale(1) translateY(0px);
+    }
+    50% {
+        background-size: 105% auto;
+        transform: scale(1.02) translateY(-10px);
+    }
+    100% {
+        background-size: 110% auto;
+        transform: scale(1.05) translateY(-20px);
+    }
+}
 }
 
 #hero h2 {
@@ -296,3 +329,4 @@ footer {
         font-size: 18px;
     }
 }
+
