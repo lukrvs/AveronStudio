@@ -80,7 +80,25 @@ function translatePage(lang) {
         const text = el.getAttribute('data-' + lang);
         if (text) el.textContent = text;
     });
+}function translatePage(lang) {
+    // Alle normalen Texte übersetzen
+    translatableElements.forEach(el => {
+        if (el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
+
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.textContent = text;
+    });
+
+    // Login Modal Texte übersetzen
+    loginElements.forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if(text) el.textContent = text;
+    });
+
+    // Login Fehlermeldungen ggf. zurücksetzen
+    loginMessage.textContent = "";
 }
+
 
 // Standard: Deutsch
 translatePage('de');
@@ -136,4 +154,10 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
+// ==============================
+// Login Elemente für Übersetzung
+// ==============================
+const loginElements = document.querySelectorAll('#loginModal [data-de]');
+const loginMessage = document.getElementById('loginMessage');
+
 
