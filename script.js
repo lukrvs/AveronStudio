@@ -90,3 +90,50 @@ languageSelect.addEventListener('change', (e) => {
     const lang = e.target.value;
     translatePage(lang);
 });
+// ==============================
+// Login Modal Funktion
+// ==============================
+const loginModal = document.getElementById('loginModal');
+const closeBtn = document.querySelector('.close-btn');
+
+// Öffnen des Modals
+function openLogin() {
+    loginModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Schließen des Modals
+closeBtn.addEventListener('click', () => {
+    loginModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+// Schließen bei Klick außerhalb
+window.addEventListener('click', (e) => {
+    if (e.target === loginModal) {
+        loginModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Login-Formular
+const loginForm = document.getElementById('loginForm');
+const loginMessage = document.getElementById('loginMessage');
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = loginForm.username.value;
+    const password = loginForm.password.value;
+
+    // Beispiel: Einfacher Dummy-Check
+    if(username === "test" && password === "1234") {
+        loginMessage.textContent = "Login erfolgreich!";
+        loginMessage.style.color = "#00ffcc";
+        loginModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    } else {
+        loginMessage.textContent = "Falscher Benutzername oder Passwort!";
+        loginMessage.style.color = "#ff4c4c";
+    }
+});
+
