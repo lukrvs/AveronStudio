@@ -71,30 +71,29 @@ cards.forEach(card => {
 // ==============================
 const languageSelect = document.getElementById('languageSelect');
 const translatableElements = document.querySelectorAll('[data-de]');
-
-// ==============================
-// Login Elemente für Übersetzung
-// ==============================
-const loginElements = document.querySelectorAll('#loginModal [data-de]');
+const loginModal = document.getElementById('loginModal');
+const loginForm = document.getElementById('loginForm');
 const loginMessage = document.getElementById('loginMessage');
 
-function translatePage(lang) {
-    // Alle normalen Texte übersetzen
-    translatableElements.forEach(el => {
-        if (el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
+// Login Modal Texte für Übersetzung
+const loginElements = loginModal.querySelectorAll('[data-de]');
 
+function translatePage(lang) {
+    // Normale Texte
+    translatableElements.forEach(el => {
+        if(el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
         const text = el.getAttribute('data-' + lang);
-        if (text) el.textContent = text;
+        if(text) el.textContent = text;
     });
 
-    // Login Modal Texte übersetzen
+    // Login Modal Texte
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    // Login Fehlermeldungen zurücksetzen
-    loginMessage.textContent = "";
+    // Fehlermeldung zurücksetzen
+    loginMessage.textContent = '';
 }
 
 // Standard: Deutsch
@@ -109,7 +108,6 @@ languageSelect.addEventListener('change', (e) => {
 // ==============================
 // Login Modal Funktion
 // ==============================
-const loginModal = document.getElementById('loginModal');
 const closeBtn = document.querySelector('.close-btn');
 
 // Öffnen des Modals
@@ -133,21 +131,17 @@ window.addEventListener('click', (e) => {
 });
 
 // Login-Formular
-const loginForm = document.getElementById('loginForm');
-
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    // Dummy-Check Beispiel
     if(username === "test" && password === "1234") {
         loginMessage.textContent = "Login erfolgreich!";
         loginMessage.style.color = "#00ffcc";
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     } else {
-        // Fehlermeldungen in allen Sprachen
         const lang = languageSelect.value;
         let errorText = "Falscher Benutzername oder Passwort!";
 
