@@ -9,7 +9,12 @@
 <body>
 
 <header>
-    <h1 data-de="Averon Studio" data-en="Averon Studio">Averon Studio</h1>
+    <h1 data-de="Averon Studio" data-en="Averon Studio" data-at="Averon Studio"
+        data-hu="Averon Studio" data-ru="Аверон Студио" data-ja="アヴェロンスタジオ"
+        data-pl="Averon Studio" data-zh="Averon工作室" data-it="Averon Studio"
+        data-fr="Averon Studio" data-es="Averon Studio" data-ch="Averon Studio">
+        Averon Studio
+    </h1>
     <nav>
         <a href="#spiele" data-de="Spiele" data-en="Games">Spiele</a>
         <a href="#about" data-de="Über mich" data-en="About Me">Über mich</a>
@@ -33,9 +38,27 @@
 </header>
 
 <section id="hero">
-    <h2 data-de="Willkommen in meiner Spielewelt!" data-en="Welcome to my game world!">Willkommen in meiner Spielewelt!</h2>
-    <p data-de="Hier siehst du alle meine Projekte und Spiele." data-en="Here you can see all my projects and games.">
-        Hier siehst du alle meine Projekte und Spiele.
+    <h2 data-de="Willkommen in meiner Spielewelt!" data-en="Welcome to my game world!"
+        data-at="Willkommen in meiner Spielewelt!" data-hu="Üdv a játékom világában!"
+        data-ru="Добро пожаловать в мой игровой мир!" data-ja="私のゲームの世界へようこそ！"
+        data-pl="Witaj w moim świecie gier!" data-zh="欢迎来到我的游戏世界！"
+        data-it="Benvenuto nel mio mondo di giochi!" data-fr="Bienvenue dans mon univers de jeux !"
+        data-es="¡Bienvenido a mi mundo de juegos!" data-ch="Willkommen in meiner Spielewelt!">
+        Willkommen in meiner Spielewelt!
+    </h2>
+    <p data-de="Hier siehst du alle meine Projekte und Spiele."
+       data-en="Here you can see all my projects and games."
+       data-at="Hier siehst du alle meine Projekte und Spiele."
+       data-hu="Itt láthatod az összes projektet és játékot."
+       data-ru="Здесь вы можете увидеть все мои проекты и игры."
+       data-ja="ここで私のすべてのプロジェクトとゲームを見ることができます。"
+       data-pl="Tutaj możesz zobaczyć wszystkie moje projekty i gry."
+       data-zh="在这里你可以看到我所有的项目和游戏。"
+       data-it="Qui puoi vedere tutti i miei progetti e giochi."
+       data-fr="Vous pouvez voir ici tous mes projets et jeux."
+       data-es="Aquí puedes ver todos mis proyectos y juegos."
+       data-ch="Hier siehst du alle meine Projekte und Spiele.">
+       Hier siehst du alle meine Projekte und Spiele.
     </p>
 </section>
 
@@ -56,8 +79,9 @@
 
 <section id="about">
     <h2 data-de="Über mich" data-en="About Me">Über mich</h2>
-    <p data-de="Ich programmiere Spiele und erstelle eigene Projekte." data-en="I program games and create my own projects.">
-        Ich programmiere Spiele und erstelle eigene Projekte.
+    <p data-de="Ich programmiere Spiele und erstelle eigene Projekte."
+       data-en="I program games and create my own projects.">
+       Ich programmiere Spiele und erstelle eigene Projekte.
     </p>
 </section>
 
@@ -71,12 +95,12 @@
 </section>
 
 <!-- Lightbox -->
-<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;justify-content:center;align-items:center;background:rgba(0,0,0,0.8);">
-    <img id="lightbox-img" src="" alt="" style="max-width:80%;max-height:80%;">
+<div id="lightbox">
+    <img id="lightbox-img" src="" alt="">
 </div>
 
 <!-- Login Modal -->
-<div id="loginModal" class="modal" style="display:none;">
+<div id="loginModal" class="modal">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
     <h2 data-de="Login" data-en="Login" data-at="Login" data-hu="Bejelentkezés"
@@ -87,8 +111,8 @@
     <form id="loginForm">
       <label for="username" data-de="Benutzername" data-en="Username" data-at="Benutzername"
              data-hu="Felhasználónév" data-ru="Имя пользователя" data-ja="ユーザー名"
-             data-pl="Nazwa użytkownika" data-zh="用户名" data-it="Nome utente" data-fr="Nom d&apos;utilisateur"
-             data-es="Nombre de usuario" data-ch="Benutzername">
+             data-pl="Nazwa użytkownika" data-zh="用户名" data-it="Nome utente"
+             data-fr="Nom d'utilisateur" data-es="Nombre de usuario" data-ch="Benutzername">
              Benutzername
       </label>
       <input type="text" id="username" name="username" required>
@@ -117,4 +141,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
