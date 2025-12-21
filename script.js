@@ -65,3 +65,28 @@ cards.forEach(card => {
         card.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
     });
 });
+
+// ==============================
+// Sprachumschaltung
+// ==============================
+const languageSelect = document.getElementById('languageSelect');
+const translatableElements = document.querySelectorAll('[data-de]');
+
+function translatePage(lang) {
+    translatableElements.forEach(el => {
+        // Ausnahme: Spiele-Namen "Nightveil" nicht übersetzen
+        if (el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
+
+        const text = el.getAttribute('data-' + lang);
+        if (text) el.textContent = text;
+    });
+}
+
+// Standard: Deutsch
+translatePage('de');
+
+// Event: Sprache wechseln
+languageSelect.addEventListener('change', (e) => {
+    const lang = e.target.value;
+    translatePage(lang);
+});
