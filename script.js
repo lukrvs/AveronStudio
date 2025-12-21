@@ -112,17 +112,22 @@ const closeBtn = document.querySelector('.close-btn');
 
 // Öffnen des Modals
 function openLogin() {
-    // Übersetze Login-Modal auf aktuelle Sprache
     const lang = languageSelect.value;
+
+    // Alle Elemente im Modal mit data-* Attributen
+    const loginElements = loginModal.querySelectorAll('[data-de]');
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
+
+    // Fehlermeldung zurücksetzen
     loginMessage.textContent = "";
 
     loginModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
+
 
 // Schließen des Modals
 closeBtn.addEventListener('click', () => {
@@ -171,6 +176,7 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
+
 
 
 
