@@ -112,8 +112,18 @@ const closeBtn = document.querySelector('.close-btn');
 
 // Öffnen des Modals
 function openLogin() {
+    // Übersetze Login-Modal auf aktuelle Sprache
+    const lang = languageSelect.value;
+    loginElements.forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if(text) el.textContent = text;
+    });
+    loginMessage.textContent = "";
+
     loginModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+}
+
 }
 
 // Schließen des Modals
@@ -163,3 +173,4 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
+
