@@ -72,15 +72,13 @@ cards.forEach(card => {
 const languageSelect = document.getElementById('languageSelect');
 const translatableElements = document.querySelectorAll('[data-de]');
 
-function translatePage(lang) {
-    translatableElements.forEach(el => {
-        // Ausnahme: Spiele-Namen "Nightveil" nicht übersetzen
-        if (el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
+// ==============================
+// Login Elemente für Übersetzung
+// ==============================
+const loginElements = document.querySelectorAll('#loginModal [data-de]');
+const loginMessage = document.getElementById('loginMessage');
 
-        const text = el.getAttribute('data-' + lang);
-        if (text) el.textContent = text;
-    });
-}function translatePage(lang) {
+function translatePage(lang) {
     // Alle normalen Texte übersetzen
     translatableElements.forEach(el => {
         if (el.tagName.toLowerCase() === 'h3' && el.textContent.trim() === 'Nightveil') return;
@@ -95,10 +93,9 @@ function translatePage(lang) {
         if(text) el.textContent = text;
     });
 
-    // Login Fehlermeldungen ggf. zurücksetzen
+    // Login Fehlermeldungen zurücksetzen
     loginMessage.textContent = "";
 }
-
 
 // Standard: Deutsch
 translatePage('de');
@@ -108,6 +105,7 @@ languageSelect.addEventListener('change', (e) => {
     const lang = e.target.value;
     translatePage(lang);
 });
+
 // ==============================
 // Login Modal Funktion
 // ==============================
@@ -136,28 +134,38 @@ window.addEventListener('click', (e) => {
 
 // Login-Formular
 const loginForm = document.getElementById('loginForm');
-const loginMessage = document.getElementById('loginMessage');
 
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
 
-    // Beispiel: Einfacher Dummy-Check
+    // Dummy-Check Beispiel
     if(username === "test" && password === "1234") {
         loginMessage.textContent = "Login erfolgreich!";
         loginMessage.style.color = "#00ffcc";
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     } else {
-        loginMessage.textContent = "Falscher Benutzername oder Passwort!";
+        // Fehlermeldungen in allen Sprachen
+        const lang = languageSelect.value;
+        let errorText = "Falscher Benutzername oder Passwort!";
+
+        switch(lang) {
+            case 'en': errorText = "Wrong username or password!"; break;
+            case 'at': errorText = "Falscher Benutzername oder Passwort!"; break;
+            case 'hu': errorText = "Hibás felhasználónév vagy jelszó!"; break;
+            case 'ru': errorText = "Неверное имя пользователя или пароль!"; break;
+            case 'ja': errorText = "ユーザー名またはパスワードが間違っています！"; break;
+            case 'pl': errorText = "Niepoprawna nazwa użytkownika lub hasło!"; break;
+            case 'zh': errorText = "用户名或密码错误！"; break;
+            case 'it': errorText = "Nome utente o password errati!"; break;
+            case 'fr': errorText = "Nom d'utilisateur ou mot de passe incorrect!"; break;
+            case 'es': errorText = "¡Nombre de usuario o contraseña incorrectos!"; break;
+            case 'ch': errorText = "Falscher Benutzername oder Passwort!"; break;
+        }
+
+        loginMessage.textContent = errorText;
         loginMessage.style.color = "#ff4c4c";
     }
 });
-// ==============================
-// Login Elemente für Übersetzung
-// ==============================
-const loginElements = document.querySelectorAll('#loginModal [data-de]');
-const loginMessage = document.getElementById('loginMessage');
-
-
