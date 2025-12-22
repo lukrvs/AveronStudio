@@ -102,6 +102,14 @@ function openLogin() {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
+    function openRegister() {
+    const registerModal = document.getElementById('registerModal');
+    if (!registerModal) return;
+
+    registerModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
 
     loginMessage.textContent = '';
     loginModal.style.display = 'flex';
@@ -180,5 +188,6 @@ if (registerHint) {
         openRegister(); // kommt von deinem Register-Script
     });
 }
+
 
 
