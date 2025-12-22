@@ -406,9 +406,12 @@ window.addEventListener('load', () => {
 // ==============================
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
+
     if(currentUser) {
-        // Login-Link zeigt Benutzernamen
+        // Benutzername anzeigen
         loginNav.textContent = currentUser;
+
+        // Klick auf Benutzernamen öffnet / schließt Dropdown
         loginNav.onclick = () => {
             if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
                 const users = JSON.parse(localStorage.getItem('users'));
@@ -423,18 +426,26 @@ function updateLoginState() {
                 userDropdown.style.display = 'none';
             }
         };
+
     } else {
-        translatePage(languageSelect.value); // zurück zu „Anmelden“
+        // Kein User: Link zeigt Login
+        loginNav.textContent = '';
+        const lang = languageSelect.value;
+        loginNav.textContent = loginNav.getAttribute('data-' + lang);
         userDropdown.style.display = 'none';
+
+        // Klick öffnet Login Modal
         loginNav.onclick = openLogin;
     }
 }
 
-// Logout
+// Logout-Button
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('currentUser');
-    updateLoginState();
+    updateLoginState(); // nach Abmelden wieder „Anmelden“
 });
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
+
