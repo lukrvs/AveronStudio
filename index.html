@@ -201,11 +201,36 @@
     </h2>
 
     <form id="registerForm">
-      <input type="text" name="username" placeholder="Benutzername" required>
-      <input type="email" name="email" placeholder="E-Mail" required>
-      <input type="password" name="password" placeholder="Passwort" required>
-      <input type="password" name="passwordConfirm" placeholder="Passwort bestätigen" required>
-      <button type="submit">Registrieren</button>
+      <form id="registerForm">
+  <input type="text" name="username" placeholder="Benutzername" 
+         data-de="Benutzername" data-en="Username" data-at="Benutzername" 
+         data-hu="Felhasználónév" data-ru="Имя пользователя" data-ja="ユーザー名"
+         data-pl="Nazwa użytkownika" data-zh="用户名" data-it="Nome utente" 
+         data-fr="Nom d'utilisateur" data-es="Nombre de usuario" data-ch="Benutzername" required>
+
+  <input type="email" name="email" placeholder="E-Mail" 
+         data-de="E-Mail" data-en="E-Mail" data-at="E-Mail" data-hu="E-mail" 
+         data-ru="Эл. почта" data-ja="メール" data-pl="E-mail" data-zh="电子邮件" 
+         data-it="E-mail" data-fr="E-mail" data-es="Correo electrónico" data-ch="E-Mail" required>
+
+  <input type="password" name="password" placeholder="Passwort" 
+         data-de="Passwort" data-en="Password" data-at="Passwort" data-hu="Jelszó" 
+         data-ru="Пароль" data-ja="パスワード" data-pl="Hasło" data-zh="密码" 
+         data-it="Password" data-fr="Mot de passe" data-es="Contraseña" data-ch="Passwort" required>
+
+  <input type="password" name="passwordConfirm" placeholder="Passwort bestätigen" 
+         data-de="Passwort bestätigen" data-en="Confirm Password" data-at="Passwort bestätigen" 
+         data-hu="Jelszó megerősítése" data-ru="Подтвердите пароль" data-ja="パスワードを確認" 
+         data-pl="Potwierdź hasło" data-zh="确认密码" data-it="Conferma Password" 
+         data-fr="Confirmer le mot de passe" data-es="Confirmar contraseña" data-ch="Passwort bestätigen" required>
+
+  <button type="submit" data-de="Registrieren" data-en="Register" data-at="Registrier di" 
+          data-hu="Regisztráció" data-ru="Регистрация" data-ja="登録" data-pl="Rejestracja" 
+          data-zh="注册" data-it="Registrati" data-fr="Inscription" data-es="Registrarse" data-ch="Registrieren">
+          Registrieren
+  </button>
+</form>
+
     </form>
 
     <p id="registerMessage"></p>
@@ -225,6 +250,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
