@@ -280,13 +280,20 @@ registerForm.addEventListener('submit', (e) => {
 });
 
 // ==============================
-// Dropdown & Login State Management
+// Dropdown & Mein Konto
 // ==============================
 const loginNav = document.getElementById('loginNav');
 const userDropdown = document.querySelector('.user-dropdown');
-const dropdownUsername = document.getElementById('dropdownUsername');
+const accountBtn = document.getElementById('accountBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 
+const accountModal = document.getElementById('accountModal');
+const closeAccount = accountModal.querySelector('.close-account');
+const accountUsername = document.getElementById('accountUsername');
+const accountEmail = document.getElementById('accountEmail');
+const account2FA = document.getElementById('account2FA');
+
+// Funktion: Dropdown-Login State
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     const lang = languageSelect.value;
@@ -295,21 +302,9 @@ function updateLoginState() {
         loginNav.textContent = currentUser;
         userDropdown.style.display = 'none';
 
-        // Klick auf Benutzername öffnet / schließt Dropdown
         loginNav.onclick = (e) => {
             e.preventDefault();
-            if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
-                const users = JSON.parse(localStorage.getItem('users') || '{}');
-                const userData = users[currentUser];
-                dropdownUsername.innerHTML = `
-                    <p>Mein Konto:</p>
-                    <p>Benutzername: ${currentUser}</p>
-                    <p>Passwort: ${userData.password}</p>
-                `;
-                userDropdown.style.display = 'block';
-            } else {
-                userDropdown.style.display = 'none';
-            }
+            userDropdown.style.display = userDropdown.style.display === 'flex' ? 'none' : 'flex';
         };
     } else {
         loginNav.textContent = loginNav.getAttribute('data-' + lang);
@@ -317,25 +312,20 @@ function updateLoginState() {
         loginNav.onclick = openLogin;
     }
 }
-const accountModal = document.getElementById('accountModal');
-const closeAccount = accountModal.querySelector('.close-account');
-const accountUsername = document.getElementById('accountUsername');
-const accountEmail = document.getElementById('accountEmail');
-const account2FA = document.getElementById('account2FA');
 
-function showAccountModal() {
+// Funktion: „Mein Konto“ Modal
+accountBtn.addEventListener('click', () => {
     const currentUser = localStorage.getItem('currentUser');
     const users = JSON.parse(localStorage.getItem('users') || '{}');
 
     if(currentUser && users[currentUser]) {
         accountUsername.textContent = currentUser;
         accountEmail.textContent = users[currentUser].email;
-        // account2FA.textContent = users[currentUser].2faStatus || 'Nicht aktiviert';
-        account2FA.textContent = 'Nicht aktiviert'; // Platzhalter
+        account2FA.textContent = 'Nicht aktiviert'; // Platzhalter für 2FA
         accountModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
-}
+});
 
 // Close Account Modal
 closeAccount.addEventListener('click', () => {
@@ -343,7 +333,7 @@ closeAccount.addEventListener('click', () => {
     document.body.style.overflow = 'auto';
 });
 
-// Klick außerhalb schließen
+// Klick außerhalb Modal schließen
 accountModal.addEventListener('click', (e) => {
     if(e.target === accountModal){
         accountModal.style.display = 'none';
@@ -359,4 +349,3 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
-
