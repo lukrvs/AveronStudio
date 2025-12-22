@@ -31,9 +31,19 @@
    Anmelden
 </a>
 <!-- Dropdown für angemeldeten User -->
-<div class="user-dropdown" style="display:none; position:absolute; background:#222; color:white; padding:10px; top:100%; left:0;">
-    <p id="dropdownUsername"></p>
+<div class="user-dropdown" style="display:none; position:absolute; background:#222; color:white; padding:10px; flex-direction:column; gap:5px; border-radius:5px;">
+    <button id="accountBtn">Mein Konto</button>
     <button id="logoutBtn">Abmelden</button>
+</div>
+
+<!-- Modal für „Mein Konto“ -->
+<div id="accountModal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+     background:#111; color:white; padding:20px; border-radius:10px; z-index:1000;">
+    <h2>Mein Konto</h2>
+    <p id="accountUsername"></p>
+    <p id="accountEmail"></p>
+    <p id="account2FA"></p>
+    <button class="close-account">Schließen</button>
 </div>
     </nav>
     
@@ -271,6 +281,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
