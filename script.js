@@ -298,9 +298,34 @@ function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     const lang = languageSelect.value;
 
-    if(currentUser) {
-        loginNav.textContent = currentUser;
-        userDropdown.style.display = 'none';
+if(currentUser) {
+    loginNav.textContent = currentUser;
+    userDropdown.style.display = 'none';
+
+    // Wenn Dropdown noch nicht existiert, erstelle es
+    if(!userDropdown.hasChildNodes()){
+        // Button „Mein Konto“
+        const accountBtn = document.createElement('button');
+        accountBtn.textContent = 'Mein Konto';
+        accountBtn.addEventListener('click', showAccountModal);
+        userDropdown.appendChild(accountBtn);
+
+        // Button „Abmelden“
+        const logoutBtn = document.createElement('button');
+        logoutBtn.textContent = 'Abmelden';
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            updateLoginState();
+        });
+        userDropdown.appendChild(logoutBtn);
+    }
+
+    loginNav.onclick = (e) => {
+        e.preventDefault();
+        userDropdown.style.display = userDropdown.style.display === 'flex' ? 'none' : 'flex';
+    };
+}
+
 
         loginNav.onclick = (e) => {
             e.preventDefault();
@@ -349,3 +374,4 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
