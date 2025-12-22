@@ -233,7 +233,7 @@ registerForm.addEventListener('submit', (e) => {
     const successText = {
         de: "Registrierung erfolgreich!",
         en: "Registration successful!",
-        at: "Registrierung erfolgreich!",
+        at: "Registrierung erfoigreich!",
         hu: "Sikeres regisztráció!",
         ru: "Регистрация успешна!",
         ja: "登録成功！",
@@ -260,7 +260,7 @@ registerForm.addEventListener('submit', (e) => {
         ch: "Passwörter stimmen nicht überein oder Benutzername existiert schon!"
     };
 
-    if(password !== passwordConfirm) {
+    if(password !== passwordConfirm || users[username]) {
         registerMessage.textContent = errorText[lang];
         registerMessage.style.color = "#ff4c4c";
         return;
@@ -282,4 +282,5 @@ registerForm.addEventListener('submit', (e) => {
 
     registerForm.reset();
 });
+
 
