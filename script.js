@@ -107,33 +107,11 @@ loginModal.querySelector('.close-btn').addEventListener('click', () => {
     document.body.style.overflow = 'auto';
 });
 
-// ==============================
-// REGISTER MODAL
-// ==============================
-function openRegister() {
-    loginModal.style.display = 'none';
-    registerModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
 
 // Close Register
 registerModal.querySelector('.close-btn').addEventListener('click', () => {
     registerModal.style.display = 'none';
     document.body.style.overflow = 'auto';
-});
-
-// ==============================
-// Klick außerhalb schließt Modals
-// ==============================
-window.addEventListener('click', e => {
-    if (e.target === loginModal) {
-        loginModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    if (e.target === registerModal) {
-        registerModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
 });
 
 
@@ -189,14 +167,7 @@ loginForm.addEventListener('submit', (e) => {
 // ==============================
 // Wechsel von Login zu Register
 // ==============================
-const registerHint = document.querySelector('.register-hint');
 
-if (registerHint) {
-    registerHint.addEventListener('click', () => {
-        loginModal.style.display = 'none';
-        openRegister(); // kommt von deinem Register-Script
-    });
-}
 
 // Öffnen Register Modal
 function openRegister() {
@@ -230,6 +201,7 @@ registerHint.addEventListener('click', () => {
     loginModal.style.display = 'none';
     openRegister();
 });
+
 
 
 
