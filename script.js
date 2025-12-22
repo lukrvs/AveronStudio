@@ -259,14 +259,14 @@ registerForm.addEventListener('submit', (e) => {
         es: "¡Las contraseñas no coinciden o el nombre de usuario ya existe!",
         ch: "Passwörter stimmen nicht überein oder Benutzername existiert schon!"
     };
-
+    
+const users = JSON.parse(localStorage.getItem('users') || '{}');
+    
     if(password !== passwordConfirm || users[username]) {
         registerMessage.textContent = errorText[lang];
         registerMessage.style.color = "#ff4c4c";
         return;
     }
-
-    const users = JSON.parse(localStorage.getItem('users') || '{}');
 
     if(users[username]) {
         registerMessage.textContent = errorText[lang];
@@ -282,5 +282,6 @@ registerForm.addEventListener('submit', (e) => {
 
     registerForm.reset();
 });
+
 
 
