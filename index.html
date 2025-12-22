@@ -25,18 +25,14 @@
            data-ru="Контакты" data-ja="連絡先" data-pl="Kontakt" data-zh="联系" data-it="Contatto"
            data-fr="Contact" data-es="Contacto" data-ch="Kontakt">Kontakt</a>
         <a href="javascript:void(0);" id="loginNav"
-   data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
-   data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
-   data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
-   Anmelden
-</a>
-<!-- Dropdown für angemeldeten User -->
-<div class="user-dropdown" style="display:none; position:absolute; background:#222; color:white; padding:10px; flex-direction:column; gap:5px; border-radius:5px;">
-    <!-- Buttons werden nur über JS erstellt -->
-</div>
-
+           data-de="Anmelden" data-en="Login" data-at="Ohmöden" data-hu="Bejelentkezés"
+           data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
+           data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
+           Anmelden
+        </a>
+        <div class="user-dropdown" style="display:none; flex-direction:column; gap:5px;"></div>
     </nav>
-    
+
     <select id="languageSelect">
         <option value="de">German</option>
         <option value="en">English</option>
@@ -57,7 +53,7 @@
     <h2 data-de="Willkommen in meiner Spielewelt!" data-en="Welcome to my game world!" data-at="Willkommen in meiner Spielewelt!"
         data-hu="Üdvözlünk a játékom világában!" data-ru="Добро пожаловать в мой игровой мир!"
         data-ja="私のゲームの世界へようこそ！" data-pl="Witaj w moim świecie gier!" data-zh="欢迎来到我的游戏世界！"
-        data-it="Benvenuto nel mio mondo di giochi!" data-fr="Bienvenue dans mon univers de jeux !"
+        data-it="Benvenuto nel mio mondo di giochi!" data-fr="Bienvenue dans mon univers de jeux !" 
         data-es="¡Bienvenido a mi mundo de juegos!" data-ch="Willkommen in meiner Spielewelt!">
         Willkommen in meiner Spielewelt!
     </h2>
@@ -82,50 +78,23 @@
             <img src="nightveil_poster.jpg" alt="Nightveil Poster">
             <h3>Nightveil</h3>
             <p data-de="Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung."
-               data-en="Anime horror game: Creepy lobby, friends waiting and exploring the dark environment."
-               data-at="Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung."
-               data-hu="Anime-horror játék: Félelmetes lobby, barátok várnak és felfedezik a sötét környezetet."
-               data-ru="Аниме-хоррор игра: жуткое лобби, друзья ждут и исследуют тёмное окружение."
-               data-ja="アニメホラーゲーム：不気味なロビー、友達が待って暗い環境を探索。"
-               data-pl="Gra anime horror: Przerażająca lobby, przyjaciele czekają i eksplorują ciemne otoczenie."
-               data-zh="动漫恐怖游戏：阴森的大堂，朋友们等待并探索黑暗环境。"
-               data-it="Gioco horror anime: Lobby inquietante, amici in attesa ed esplorano l'ambiente oscuro."
-               data-fr="Jeu d'horreur anime : hall effrayant, amis attendant et explorant l'environnement sombre."
-               data-es="Juego de horror anime: Lobby espeluznante, amigos esperando y explorando el entorno oscuro."
-               data-ch="Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung.">
+               data-en="Anime horror game: Creepy lobby, friends waiting and exploring the dark environment.">
                Anime-Horror-Spiel: Gruselige Lobby, Freunde warten und erkunden die düstere Umgebung.
             </p>
-            <span class="play-btn" data-de="Jetzt spielen" data-en="Play Now" data-at="Jetzt spielen" data-hu="Most játszani"
-                  data-ru="Играть сейчас" data-ja="今すぐプレイ" data-pl="Graj teraz" data-zh="立即玩" data-it="Gioca ora"
-                  data-fr="Jouer maintenant" data-es="Jugar ahora" data-ch="Jetzt spielen">
-                  Jetzt spielen
-            </span>
+            <span class="play-btn" data-de="Jetzt spielen" data-en="Play Now">Jetzt spielen</span>
         </a>
     </div>
 </section>
 
 <section id="about">
-    <h2 data-de="Über mich" data-en="About Me" data-at="Über mich" data-hu="Rólam"
-        data-ru="Обо мне" data-ja="私について" data-pl="O mnie" data-zh="关于我"
-        data-it="Su di me" data-fr="À propos" data-es="Sobre mí" data-ch="Über mich">
-        Über mich
-    </h2>
-    <p data-de="Ich programmiere Spiele und erstelle eigene Projekte." data-en="I program games and create my own projects."
-       data-at="Ich programmiere Spiele und erstelle eigene Projekte." data-hu="Játékokat programozok és saját projekteket készítek."
-       data-ru="Я программирую игры и создаю свои проекты." data-ja="私はゲームをプログラムし、自分のプロジェクトを作成します。"
-       data-pl="Programuję gry i tworzę własne projekty." data-zh="我编写游戏并创建自己的项目。"
-       data-it="Programmo giochi e creo i miei progetti." data-fr="Je programme des jeux et crée mes propres projets."
-       data-es="Programo juegos y creo mis propios proyectos." data-ch="Ich programmiere Spiele und erstelle eigene Projekte.">
+    <h2 data-de="Über mich" data-en="About Me">Über mich</h2>
+    <p data-de="Ich programmiere Spiele und erstelle eigene Projekte." data-en="I program games and create my own projects.">
        Ich programmiere Spiele und erstelle eigene Projekte.
     </p>
 </section>
 
 <section id="contact">
-    <h2 data-de="Kontakt" data-en="Contact" data-at="Kontakt" data-hu="Kapcsolat"
-        data-ru="Контакты" data-ja="連絡先" data-pl="Kontakt" data-zh="联系"
-        data-it="Contatto" data-fr="Contact" data-es="Contacto" data-ch="Kontakt">
-        Kontakt
-    </h2>
+    <h2 data-de="Kontakt" data-en="Contact">Kontakt</h2>
     <ul>
         <li><a href="https://discord.gg/qkTq36SB7k" target="_blank" data-de="Discord" data-en="Discord">Discord</a></li>
         <li><a href="https://twitch.tv/lukrvs" target="_blank" data-de="Twitch" data-en="Twitch">Twitch</a></li>
@@ -142,49 +111,16 @@
 <div id="loginModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
-    <h2 data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
-        data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
-        data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
-        Login
-    </h2>
+    <h2 data-de="Anmelden" data-en="Login">Login</h2>
     <form id="loginForm">
-      <label for="username" data-de="Benutzername" data-en="Username" data-at="Benutzername"
-             data-hu="Felhasználónév" data-ru="Имя пользователя" data-ja="ユーザー名"
-             data-pl="Nazwa użytkownika" data-zh="用户名" data-it="Nome utente" data-fr="Nom d'utilisateur"
-             data-es="Nombre de usuario" data-ch="Benutzername">
-             Benutzername
-      </label>
-      <input type="text" id="username" name="username" required>
-
-      <label for="password" data-de="Passwort" data-en="Password" data-at="Passwort"
-             data-hu="Jelszó" data-ru="Пароль" data-ja="パスワード" data-pl="Hasło"
-             data-zh="密码" data-it="Password" data-fr="Mot de passe" data-es="Contraseña" data-ch="Passwort">
-             Passwort
-      </label>
-      <input type="password" id="password" name="password" required>
-
-      <button type="submit" data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
-              data-ru="Войти" data-ja="ログイン" data-pl="Zaloguj się" data-zh="登录"
-              data-it="Accedi" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
-              Login
-      </button>
+      <label data-de="Benutzername" data-en="Username">Benutzername</label>
+      <input type="text" name="username" required>
+      <label data-de="Passwort" data-en="Password">Passwort</label>
+      <input type="password" name="password" required>
+      <button type="submit" data-de="Anmelden" data-en="Login">Login</button>
     </form>
     <p id="loginMessage"></p>
-      <p class="register-hint"
-   data-de="Noch keinen Account? Registrieren"
-   data-en="No account yet? Register"
-   data-at="Noch keinen Account? Registrieren"
-   data-hu="Nincs fiókod? Regisztráció"
-   data-ru="Нет аккаунта? Регистрация"
-   data-ja="アカウントをお持ちでないですか？ 登録"
-   data-pl="Nie masz konta? Rejestracja"
-   data-zh="还没有账户？注册"
-   data-it="Non hai un account? Registrati"
-   data-fr="Pas encore de compte ? Inscription"
-   data-es="¿No tienes cuenta? Regístrate"
-   data-ch="No Account? Registrieren">
-   Noch keinen Account? Registrieren
-</p>
+    <p class="register-hint" data-de="Noch keinen Account? Registrieren" data-en="No account yet? Register">Noch keinen Account? Registrieren</p>
   </div>
 </div>
 
@@ -192,53 +128,14 @@
 <div id="registerModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close-btn-register">&times;</span>
-
-    <h2
-      data-de="Registrieren"
-      data-en="Register"
-      data-at="Registrieren"
-      data-hu="Regisztráció"
-      data-ru="Регистрация"
-      data-ja="登録"
-      data-pl="Rejestracja"
-      data-zh="注册"
-      data-it="Registrati"
-      data-fr="Inscription"
-      data-es="Registrarse"
-      data-ch="Registrieren">
-      Registrieren
-    </h2>
-
-      <form id="registerForm">
-  <input type="text" name="username" placeholder="Benutzername" 
-         data-de="Benutzername" data-en="Username" data-at="Benutzername" 
-         data-hu="Felhasználónév" data-ru="Имя пользователя" data-ja="ユーザー名"
-         data-pl="Nazwa użytkownika" data-zh="用户名" data-it="Nome utente" 
-         data-fr="Nom d'utilisateur" data-es="Nombre de usuario" data-ch="Benutzername" required>
-
-  <input type="email" name="email" placeholder="E-Mail" 
-         data-de="E-Mail" data-en="E-Mail" data-at="E-Mail" data-hu="E-mail" 
-         data-ru="Эл. почта" data-ja="メール" data-pl="E-mail" data-zh="电子邮件" 
-         data-it="E-mail" data-fr="E-mail" data-es="Correo electrónico" data-ch="E-Mail" required>
-
-  <input type="password" name="password" placeholder="Passwort" 
-         data-de="Passwort" data-en="Password" data-at="Passwort" data-hu="Jelszó" 
-         data-ru="Пароль" data-ja="パスワード" data-pl="Hasło" data-zh="密码" 
-         data-it="Password" data-fr="Mot de passe" data-es="Contraseña" data-ch="Passwort" required>
-
-  <input type="password" name="passwordConfirm" placeholder="Passwort bestätigen" 
-         data-de="Passwort bestätigen" data-en="Confirm Password" data-at="Passwort bestätigen" 
-         data-hu="Jelszó megerősítése" data-ru="Подтвердите пароль" data-ja="パスワードを確認" 
-         data-pl="Potwierdź hasło" data-zh="确认密码" data-it="Conferma Password" 
-         data-fr="Confirmer le mot de passe" data-es="Confirmar contraseña" data-ch="Passwort bestätigen" required>
-
-  <button type="submit" data-de="Registrieren" data-en="Register" data-at="Registrieren" 
-          data-hu="Regisztráció" data-ru="Регистрация" data-ja="登録" data-pl="Rejestracja" 
-          data-zh="注册" data-it="Registrati" data-fr="Inscription" data-es="Registrarse" data-ch="Registrieren">
-          Registrieren
-  </button>
-</form>
-
+    <h2 data-de="Registrieren" data-en="Register">Registrieren</h2>
+    <form id="registerForm">
+      <input type="text" name="username" required data-de="Benutzername" data-en="Username" placeholder="Benutzername">
+      <input type="email" name="email" required data-de="E-Mail" data-en="E-Mail" placeholder="E-Mail">
+      <input type="password" name="password" required data-de="Passwort" data-en="Password" placeholder="Passwort">
+      <input type="password" name="passwordConfirm" required data-de="Passwort bestätigen" data-en="Confirm Password" placeholder="Passwort bestätigen">
+      <button type="submit" data-de="Registrieren" data-en="Register">Registrieren</button>
+    </form>
     <p id="registerMessage"></p>
   </div>
 </div>
@@ -248,13 +145,16 @@
     <div style="background:#222; color:white; padding:20px; border-radius:10px; width:300px; max-width:90%; position:relative;">
         <span class="close-account" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px;">&times;</span>
         <h2>Mein Konto</h2>
-        <p><strong>Benutzername:</strong> <span id="accountUsernameDisplay"></span></p>
-        <p><strong>Email:</strong> <span id="accountEmailDisplay"></span></p>
-        <p><strong>2FA:</strong> <span id="account2FADisplay">Nicht aktiviert</span></p>
+        <p><strong>Benutzername:</strong> <span id="accountUsername"></span></p>
+        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+        <p><strong>2FA:</strong> <span id="account2FA">Nicht aktiviert</span></p>
     </div>
 </div>
 
 <footer>
-    <p data-de="© 2025 Averon Studio" data-en="© 2025 Averon Studio" data-at="© 2025 Averon Studio"
-       data-hu="© 2025 Averon Studio" data-ru="© 202
+    <p data-de="© 2025 Averon Studio" data-en="© 2025 Averon Studio">© 2025 Averon Studio</p>
+</footer>
 
+<script src="script.js"></script>
+</body>
+</html>
