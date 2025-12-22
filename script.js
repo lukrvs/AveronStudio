@@ -317,6 +317,39 @@ function updateLoginState() {
         loginNav.onclick = openLogin;
     }
 }
+const accountModal = document.getElementById('accountModal');
+const closeAccount = accountModal.querySelector('.close-account');
+const accountUsername = document.getElementById('accountUsername');
+const accountEmail = document.getElementById('accountEmail');
+const account2FA = document.getElementById('account2FA');
+
+function showAccountModal() {
+    const currentUser = localStorage.getItem('currentUser');
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    if(currentUser && users[currentUser]) {
+        accountUsername.textContent = currentUser;
+        accountEmail.textContent = users[currentUser].email;
+        // account2FA.textContent = users[currentUser].2faStatus || 'Nicht aktiviert';
+        account2FA.textContent = 'Nicht aktiviert'; // Platzhalter
+        accountModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Close Account Modal
+closeAccount.addEventListener('click', () => {
+    accountModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+// Klick außerhalb schließen
+accountModal.addEventListener('click', (e) => {
+    if(e.target === accountModal){
+        accountModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
 
 // Logout
 logoutBtn.addEventListener('click', () => {
@@ -326,3 +359,4 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
