@@ -284,8 +284,7 @@ registerForm.addEventListener('submit', (e) => {
 // ==============================
 const loginNav = document.getElementById('loginNav');
 const userDropdown = document.querySelector('.user-dropdown');
-const accountBtn = document.getElementById('accountBtn');
-const logoutBtn = document.getElementById('logoutBtn');
+
 
 // Dropdown Positionierung
 loginNav.style.position = 'relative'; // Dropdown relativ zum Namen
@@ -411,6 +410,7 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
 
 
 
