@@ -192,7 +192,7 @@ loginForm.addEventListener('submit', (e) => {
         at: "Falscher Benutzername oder Passwort!",
         hu: "Hibás felhasználónév vagy jelszó!",
         ru: "Неверное имя пользователя или пароль!",
-        ja: "ユーザー名またはパスワードが間違っています！",
+        ja: "ユーザー名またはパスワード ist falsch!",
         pl: "Niepoprawna nazwa użytkownika lub hasło!",
         zh: "用户名或密码错误！",
         it: "Nome utente o password errati!",
@@ -214,7 +214,7 @@ loginForm.addEventListener('submit', (e) => {
         document.body.style.overflow = 'auto';
         loginForm.reset();
 
-        updateNavUser(); // Navbar aktualisieren
+        updateLoginState(); // Navbar aktualisieren
     } else {
         loginMessage.textContent = errorText[lang];
         loginMessage.style.color = "#ff4c4c";
@@ -236,7 +236,7 @@ registerForm.addEventListener('submit', (e) => {
     const successText = {
         de: "Registrierung erfolgreich!",
         en: "Registration successful!",
-        at: "Registrierung erfoigreich!",
+        at: "Registrierung erfolgreich!",
         hu: "Sikeres regisztráció!",
         ru: "Регистрация успешна!",
         ja: "登録成功！",
@@ -254,7 +254,7 @@ registerForm.addEventListener('submit', (e) => {
         at: "Passwörter stimmen nicht überein oder Benutzername existiert schon!",
         hu: "A jelszavak nem egyeznek vagy a felhasználónév már létezik!",
         ru: "Пароли не совпадают или имя пользователя уже существует!",
-        ja: "パスワードが一致しないか、ユーザー名はすでに存在します！",
+        ja: "パスワードが一致しないか、ユーザー名 ist schon da!",
         pl: "Hasła nie zgadzają się lub nazwa użytkownika już istnieje!",
         zh: "密码不匹配或用户名已存在！",
         it: "Le password non corrispondono o il nome utente esiste già!",
@@ -281,126 +281,8 @@ registerForm.addEventListener('submit', (e) => {
 });
 
 // ==============================
-// Navbar aktualisieren für angemeldeten Benutzer
+// User Dropdown & Login-Namen
 // ==============================
-function updateNavUser() {
-    const loginNav = document.querySelector('nav a[href="javascript:void(0);"]');
-    const currentUser = localStorage.getItem('currentUser');
-
-    if(currentUser) {
-        loginNav.textContent = currentUser;
-
-        // Dropdown erstellen
-        let dropdown = document.createElement('div');
-        dropdown.classList.add('user-dropdown');
-        dropdown.style.position = 'absolute';
-        dropdown.style.background = '#111';
-        dropdown.style.color = '#fff';
-        dropdown.style.padding = '10px';
-        dropdown.style.display = 'none';
-        dropdown.style.flexDirection = 'column';
-        dropdown.style.gap = '5px';
-        dropdown.style.borderRadius = '5px';
-
-        // Mein Konto
-        let accountBtn = document.createElement('button');
-        accountBtn.textContent = 'Mein Konto';
-        accountBtn.addEventListener('click', showAccount);
-        dropdown.appendChild(accountBtn);
-
-        // Abmelden
-        let logoutBtn = document.createElement('button');
-        logoutBtn.textContent = 'Abmelden';
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            location.reload();
-        });
-        dropdown.appendChild(logoutBtn);
-
-        // Dropdown zum Navbar-Link hinzufügen
-        loginNav.style.position = 'relative';
-        loginNav.appendChild(dropdown);
-
-        // Dropdown bei Klick anzeigen/ausblenden
-        loginNav.addEventListener('click', () => {
-            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-        });
-    }
-}
-
-// ==============================
-// „Mein Konto“ Funktion
-// ==============================
-function showAccount() {
-    const currentUser = localStorage.getItem('currentUser');
-    const users = JSON.parse(localStorage.getItem('users') || '{}');
-    if(users[currentUser]) {
-        alert(`Benutzername: ${currentUser}\nPasswort: ${users[currentUser].password}`);
-    }
-}
-function updateNavUser() {
-    const loginNav = document.getElementById('loginNav'); // Holt den Login-Link
-    const currentUser = localStorage.getItem('currentUser');
-
-    if(currentUser && loginNav) {
-        loginNav.textContent = currentUser;
-
-        // Dropdown erstellen
-        let dropdown = document.createElement('div');
-        dropdown.classList.add('user-dropdown');
-        dropdown.style.position = 'absolute';
-        dropdown.style.background = '#111';
-        dropdown.style.color = '#fff';
-        dropdown.style.padding = '10px';
-        dropdown.style.display = 'none';
-        dropdown.style.flexDirection = 'column';
-        dropdown.style.gap = '5px';
-        dropdown.style.borderRadius = '5px';
-        dropdown.style.top = '30px'; // Abstand unter dem Namen
-        dropdown.style.left = '0';
-
-        // Mein Konto
-        let accountBtn = document.createElement('button');
-        accountBtn.textContent = 'Mein Konto';
-        accountBtn.addEventListener('click', showAccount);
-        dropdown.appendChild(accountBtn);
-
-        // Abmelden
-        let logoutBtn = document.createElement('button');
-        logoutBtn.textContent = 'Abmelden';
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            location.reload();
-        });
-        dropdown.appendChild(logoutBtn);
-
-        loginNav.style.position = 'relative';
-        loginNav.appendChild(dropdown);
-
-        loginNav.addEventListener('click', () => {
-            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-        });
-    }
-}
-function showAccount() {
-    const currentUser = localStorage.getItem('currentUser');
-    const users = JSON.parse(localStorage.getItem('users') || '{}');
-    if(currentUser && users[currentUser]) {
-        alert(
-            `Benutzername: ${currentUser}\nPasswort: ${users[currentUser].password}`
-        );
-    } else {
-        alert('Keine Benutzerdaten gefunden.');
-    }
-}
-
-// ==============================
-// Beim Laden prüfen, ob Benutzer angemeldet ist
-// ==============================
-window.addEventListener('load', () => {
-    updateNavUser();
-});
-
 const loginNav = document.getElementById('loginNav');
 const userDropdown = document.querySelector('.user-dropdown');
 const dropdownUsername = document.getElementById('dropdownUsername');
@@ -414,7 +296,7 @@ function updateLoginState() {
         loginNav.textContent = currentUser;
         userDropdown.style.display = 'none';
 
-        // Klick auf Benutzername öffnet / schließt Dropdown
+        // Dropdown bei Klick
         loginNav.onclick = () => {
             if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
                 const users = JSON.parse(localStorage.getItem('users') || '{}');
@@ -429,10 +311,12 @@ function updateLoginState() {
                 userDropdown.style.display = 'none';
             }
         };
+
     } else {
         loginNav.textContent = loginNav.getAttribute('data-' + lang);
         userDropdown.style.display = 'none';
 
+        // Klick öffnet Login Modal
         loginNav.onclick = openLogin;
     }
 }
