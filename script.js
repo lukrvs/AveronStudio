@@ -401,5 +401,45 @@ window.addEventListener('load', () => {
     updateNavUser();
 });
 
+// ==============================
+// User Dropdown & Login-Namen
+// ==============================
+const loginNav = document.getElementById('loginNav');
+const userDropdown = document.querySelector('.user-dropdown');
+const dropdownUsername = document.getElementById('dropdownUsername');
+const logoutBtn = document.getElementById('logoutBtn');
+
+function updateLoginState() {
+    const currentUser = localStorage.getItem('currentUser');
+    if(currentUser) {
+        // Login-Link durch Benutzernamen ersetzen
+        loginNav.textContent = currentUser;
+        loginNav.onclick = () => {
+            // Dropdown ein/ausblenden beim Klicken auf Namen
+            if(userDropdown.style.display === 'none') {
+                dropdownUsername.textContent = `Benutzer: ${currentUser}`;
+                userDropdown.style.display = 'block';
+            } else {
+                userDropdown.style.display = 'none';
+            }
+        };
+    } else {
+        // Kein User angemeldet → Login-Link zurücksetzen
+        translatePage(languageSelect.value); // Übersetzung beachten
+        userDropdown.style.display = 'none';
+        loginNav.onclick = openLogin;
+    }
+}
+
+// Logout-Button
+logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    userDropdown.style.display = 'none';
+    updateLoginState();
+});
+
+// Beim Laden prüfen, ob User angemeldet
+window.addEventListener('load', updateLoginState);
+
 
 
