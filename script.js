@@ -98,7 +98,7 @@ function translatePage(lang) {
         }
     });
 
-    // Übersetze auch Input Placeholder im Register Modal
+    // Übersetze Input Placeholders im Register Modal
     const registerPlaceholders = registerForm.querySelectorAll('input');
     registerPlaceholders.forEach(input => {
         const placeholderText = input.getAttribute('data-' + lang);
@@ -284,77 +284,75 @@ registerForm.addEventListener('submit', (e) => {
 // ==============================
 const loginNav = document.getElementById('loginNav');
 const userDropdown = document.querySelector('.user-dropdown');
-
+const accountModal = document.getElementById('accountModal');
+const closeAccount = accountModal.querySelector('.close-account');
+const accountUsernameDisplay = document.getElementById('accountUsernameDisplay');
+const accountEmailDisplay = document.getElementById('accountEmailDisplay');
+const account2FADisplay = document.getElementById('account2FADisplay');
 
 // Dropdown Positionierung
-loginNav.style.position = 'relative'; // Dropdown relativ zum Namen
+loginNav.style.position = 'relative'; 
 userDropdown.style.position = 'absolute';
-userDropdown.style.top = '100%';      // direkt unter dem Namen
-userDropdown.style.left = '0';        // linksbündig zum Namen
+userDropdown.style.top = '100%';      
+userDropdown.style.left = '0';        
 userDropdown.style.zIndex = '1000';
 
 // Buttons erstellen
-let accountBtn = document.createElement('button');
-accountBtn.textContent = 'Mein Konto';
-accountBtn.addEventListener('click', showAccountModal);
-
-let logoutBtn = document.createElement('button');
-logoutBtn.textContent = 'Abmelden';
-logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('currentUser');
-    updateLoginState();
-});
-
-// Dropdown leeren und Buttons hinzufügen
-userDropdown.innerHTML = '';
-userDropdown.appendChild(accountBtn);
-userDropdown.appendChild(logoutBtn);
+function createUserDropdownButtons() {
+    userDropdown.innerHTML = '';
+    const accountBtn = document.createElement('button');
+    accountBtn.textContent = 'Mein Konto';
+    accountBtn.addEventListener('click', showAccountModal);
+    const logoutBtn = document.createElement('button');
+    logoutBtn.textContent = 'Abmelden';
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        updateLoginState();
+    });
+    userDropdown.appendChild(accountBtn);
+    userDropdown.appendChild(logoutBtn);
+}
 
 // Dropdown anzeigen/ausblenden beim Klick auf den Namen
 loginNav.onclick = (e) => {
     e.preventDefault();
-    if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
-        userDropdown.style.display = 'flex';
-    } else {
-        userDropdown.style.display = 'none';
-    }
+    userDropdown.style.display = userDropdown.style.display === 'flex' ? 'none' : 'flex';
 };
 
+// Account Modal anzeigen
+function showAccountModal() {
+    const currentUser = localStorage.getItem('currentUser');
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    if(currentUser && users[currentUser]) {
+        accountUsernameDisplay.textContent = currentUser;
+        accountEmailDisplay.textContent = users[currentUser].email;
+        account2FADisplay.textContent = 'Nicht aktiviert';
+        accountModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
 
+// Close Account Modal
+closeAccount.addEventListener('click', () => {
+    accountModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+accountModal.addEventListener('click', (e) => {
+    if(e.target === accountModal){
+        accountModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
 
-const accountModal = document.getElementById('accountModal');
-const closeAccount = accountModal.querySelector('.close-account');
-const accountUsername = document.getElementById('accountUsername');
-const accountEmail = document.getElementById('accountEmail');
-const account2FA = document.getElementById('account2FA');
-
-
-
-
+// Login State aktualisieren
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     const lang = languageSelect.value;
 
     if(currentUser) {
         loginNav.textContent = currentUser;
+        createUserDropdownButtons();
         userDropdown.style.display = 'none';
-
-        // Buttons nur erstellen, wenn noch nicht vorhanden
-        if(userDropdown.childElementCount === 0){
-            const accountBtn = document.createElement('button');
-            accountBtn.textContent = 'Mein Konto';
-            accountBtn.addEventListener('click', showAccountModal);
-            userDropdown.appendChild(accountBtn);
-
-            const logoutBtn = document.createElement('button');
-            logoutBtn.textContent = 'Abmelden';
-                localStorage.removeItem('currentUser');
-                updateLoginState();
-            });
-            userDropdown.appendChild(logoutBtn);
-        }
-
-        // Dropdown anzeigen/ausblenden beim Klick
         loginNav.onclick = (e) => {
             e.preventDefault();
             userDropdown.style.display = userDropdown.style.display === 'flex' ? 'none' : 'flex';
@@ -366,32 +364,8 @@ function updateLoginState() {
     }
 }
 
-// Close Account Modal
-closeAccount.addEventListener('click', () => {
-    accountModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
-
-// Klick außerhalb Modal schließen
-accountModal.addEventListener('click', (e) => {
-    if(e.target === accountModal){
-        accountModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Logout
-logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('currentUser');
-    updateLoginState();
-});
-
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
-
-
-
-
 
 
 
