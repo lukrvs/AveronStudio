@@ -401,20 +401,24 @@ window.addEventListener('load', () => {
     updateNavUser();
 });
 
-// ==============================
-// User Dropdown & Login-Namen
-// ==============================
+const loginNav = document.getElementById('loginNav');
+const userDropdown = document.querySelector('.user-dropdown');
+const dropdownUsername = document.getElementById('dropdownUsername');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// Zeigt angemeldeten Benutzer oder Login-Link
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
+    const lang = languageSelect.value;
 
     if(currentUser) {
-        // Benutzername anzeigen
         loginNav.textContent = currentUser;
+        userDropdown.style.display = 'none';
 
-        // Klick auf Benutzernamen öffnet / schließt Dropdown
+        // Klick auf Benutzername öffnet Dropdown
         loginNav.onclick = () => {
             if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
-                const users = JSON.parse(localStorage.getItem('users'));
+                const users = JSON.parse(localStorage.getItem('users') || '{}');
                 const userData = users[currentUser];
                 dropdownUsername.innerHTML = `
                     <p>Mein Konto:</p>
@@ -428,24 +432,19 @@ function updateLoginState() {
         };
 
     } else {
-        // Kein User: Link zeigt Login
-        loginNav.textContent = '';
-        const lang = languageSelect.value;
+        // Kein User angemeldet
         loginNav.textContent = loginNav.getAttribute('data-' + lang);
         userDropdown.style.display = 'none';
 
-        // Klick öffnet Login Modal
         loginNav.onclick = openLogin;
     }
 }
 
-// Logout-Button
+// Logout
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('currentUser');
-    updateLoginState(); // nach Abmelden wieder „Anmelden“
+    updateLoginState();
 });
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
-
-
