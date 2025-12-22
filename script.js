@@ -287,6 +287,14 @@ const userDropdown = document.querySelector('.user-dropdown');
 const accountBtn = document.getElementById('accountBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 
+// Positionierung für sauberes Dropdown
+loginNav.style.position = 'relative'; // Dropdown wird relativ zum Namen positioniert
+userDropdown.style.position = 'absolute';
+userDropdown.style.top = '100%';      // direkt unter dem Namen
+userDropdown.style.left = '0';        // linksbündig mit dem Namen
+userDropdown.style.zIndex = '1000';   // damit Dropdown über anderen Elementen liegt
+
+
 const accountModal = document.getElementById('accountModal');
 const closeAccount = accountModal.querySelector('.close-account');
 const accountUsername = document.getElementById('accountUsername');
@@ -375,6 +383,7 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
 
 
 
