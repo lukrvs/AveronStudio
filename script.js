@@ -93,32 +93,49 @@ translatePage('de');
 languageSelect.addEventListener('change', (e) => translatePage(e.target.value));
 
 // ==============================
-// Login Modal Funktion
+// LOGIN MODAL
 // ==============================
 function openLogin() {
-    const lang = languageSelect.value;
-    const loginElements = loginModal.querySelectorAll('[data-de]');
-    loginElements.forEach(el => {
-        const text = el.getAttribute('data-' + lang);
-        if(text) el.textContent = text;
-    });
-
-    loginMessage.textContent = '';
+    translatePage(languageSelect.value);
     loginModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
-closeBtn.addEventListener('click', () => {
+// Close Login
+loginModal.querySelector('.close-btn').addEventListener('click', () => {
     loginModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
-window.addEventListener('click', (e) => {
-    if(e.target === loginModal) {
+// ==============================
+// REGISTER MODAL
+// ==============================
+function openRegister() {
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Register
+registerModal.querySelector('.close-btn').addEventListener('click', () => {
+    registerModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+// ==============================
+// Klick außerhalb schließt Modals
+// ==============================
+window.addEventListener('click', e => {
+    if (e.target === loginModal) {
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
+    if (e.target === registerModal) {
+        registerModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 });
+
 
 // ==============================
 // Login-Formular
@@ -180,6 +197,7 @@ if (registerHint) {
         openRegister(); // kommt von deinem Register-Script
     });
 }
+
 
 
 
