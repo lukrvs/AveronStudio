@@ -68,28 +68,29 @@ const closeBtnLogin = loginModal.querySelector('.close-btn');
 const closeBtnRegister = registerModal.querySelector('.close-btn-register');
 const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
 
-function translatePage(lang){
+function translatePage(lang) {
+    // Alle Texte außerhalb der Modals übersetzen
     translatableElements.forEach(el => {
-        const text = el.getAttribute('data-'+lang);
+        const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    const loginElements = loginModal.querySelectorAll('[data-de]');
+    // Login Modal Texte
     loginElements.forEach(el => {
-        const text = el.getAttribute('data-'+lang);
-        if(el.tagName==='INPUT') el.placeholder = text;
-        else if(text) el.textContent = text;
+        const text = el.getAttribute('data-' + lang);
+        if(text) el.textContent = text;
     });
 
-    const registerElements = registerModal.querySelectorAll('[data-de]');
+    // Register Modal Texte + Input Placeholders
     registerElements.forEach(el => {
-        const text = el.getAttribute('data-'+lang);
-        if(el.tagName==='INPUT') el.placeholder = text;
-        else if(text) el.textContent = text;
+        if(el.tagName === 'INPUT') {
+            const placeholder = el.getAttribute('data-' + lang);
+            if(placeholder) el.placeholder = placeholder;
+        } else {
+            const text = el.getAttribute('data-' + lang);
+            if(text) el.textContent = text;
+        }
     });
-
-    loginMessage.textContent = '';
-    registerMessage.textContent = '';
 }
 
 translatePage('de');
@@ -236,3 +237,4 @@ function updateLoginState(){
     }
 }
 window.addEventListener('load', updateLoginState);
+
