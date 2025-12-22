@@ -209,6 +209,9 @@ loginForm.addEventListener('submit', (e) => {
     if(users[username] && users[username].password === password) {
         loginMessage.textContent = successText[lang];
         loginMessage.style.color = "#00ffcc";
+        
+         localStorage.setItem('currentUser', username);
+        
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
         loginForm.reset();
@@ -281,6 +284,19 @@ const users = JSON.parse(localStorage.getItem('users') || '{}');
     registerMessage.style.color = "#00ffcc";
 
     registerForm.reset();
+});
+
+window.addEventListener('load', () => {
+    const currentUser = localStorage.getItem('currentUser');
+    if(currentUser) {
+        // z.B. Button in Navbar auf „Abmelden“ ändern
+        const loginNav = document.querySelector('nav a[href="javascript:void(0);"]');
+        loginNav.textContent = "Abmelden";
+        loginNav.onclick = () => {
+            localStorage.removeItem('currentUser');
+            location.reload();
+        };
+    }
 });
 
 
