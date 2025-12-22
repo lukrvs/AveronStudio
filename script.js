@@ -287,12 +287,40 @@ const userDropdown = document.querySelector('.user-dropdown');
 const accountBtn = document.getElementById('accountBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 
-// Positionierung für sauberes Dropdown
-loginNav.style.position = 'relative'; // Dropdown wird relativ zum Namen positioniert
+// Dropdown Positionierung
+loginNav.style.position = 'relative'; // Dropdown relativ zum Namen
 userDropdown.style.position = 'absolute';
 userDropdown.style.top = '100%';      // direkt unter dem Namen
-userDropdown.style.left = '0';        // linksbündig mit dem Namen
-userDropdown.style.zIndex = '1000';   // damit Dropdown über anderen Elementen liegt
+userDropdown.style.left = '0';        // linksbündig zum Namen
+userDropdown.style.zIndex = '1000';
+
+// Buttons erstellen
+let accountBtn = document.createElement('button');
+accountBtn.textContent = 'Mein Konto';
+accountBtn.addEventListener('click', showAccountModal);
+
+let logoutBtn = document.createElement('button');
+logoutBtn.textContent = 'Abmelden';
+logoutBtn.addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    updateLoginState();
+});
+
+// Dropdown leeren und Buttons hinzufügen
+userDropdown.innerHTML = '';
+userDropdown.appendChild(accountBtn);
+userDropdown.appendChild(logoutBtn);
+
+// Dropdown anzeigen/ausblenden beim Klick auf den Namen
+loginNav.onclick = (e) => {
+    e.preventDefault();
+    if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
+        userDropdown.style.display = 'flex';
+    } else {
+        userDropdown.style.display = 'none';
+    }
+};
+
 
 
 const accountModal = document.getElementById('accountModal');
@@ -383,6 +411,7 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
 
 
 
