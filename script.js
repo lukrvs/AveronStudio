@@ -69,29 +69,32 @@ const closeBtnRegister = registerModal.querySelector('.close-btn-register');
 const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
 
 function translatePage(lang) {
-    // Alle Texte außerhalb der Modals übersetzen
+    // Alle Texte außerhalb Modals
+    const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
     translatableElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
     // Login Modal Texte
+    const loginElements = loginModal.querySelectorAll('[data-de]');
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
-        if(text) el.textContent = text;
+        if(el.tagName === 'INPUT') {
+            if(text) el.placeholder = text;
+        } else if(text) el.textContent = text;
     });
 
-    // Register Modal Texte + Input Placeholders
+    // Register Modal Texte
+    const registerElements = registerModal.querySelectorAll('[data-de]');
     registerElements.forEach(el => {
+        const text = el.getAttribute('data-' + lang);
         if(el.tagName === 'INPUT') {
-            const placeholder = el.getAttribute('data-' + lang);
-            if(placeholder) el.placeholder = placeholder;
-        } else {
-            const text = el.getAttribute('data-' + lang);
-            if(text) el.textContent = text;
-        }
+            if(text) el.placeholder = text;
+        } else if(text) el.textContent = text;
     });
 }
+
 
 translatePage('de');
 languageSelect.addEventListener('change', e => translatePage(e.target.value));
@@ -237,4 +240,5 @@ function updateLoginState(){
     }
 }
 window.addEventListener('load', updateLoginState);
+
 
