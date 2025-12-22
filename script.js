@@ -367,19 +367,6 @@ function updateLoginState() {
     }
 }
 
-
-// Funktion: „Mein Konto“ Modal
-accountBtn.addEventListener('click', () => {
-    const currentUser = localStorage.getItem('currentUser');
-    const users = JSON.parse(localStorage.getItem('users') || '{}');
-
-    if(currentUser && users[currentUser]) {
-        accountUsername.textContent = currentUser;
-        accountEmail.textContent = users[currentUser].email;
-        account2FA.textContent = 'Nicht aktiviert'; // Platzhalter für 2FA
-        accountModal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
 });
 
 // Close Account Modal
@@ -404,6 +391,7 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
 
 
 
