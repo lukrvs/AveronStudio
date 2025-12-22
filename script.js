@@ -87,19 +87,17 @@ function translatePage(lang) {
     });
 
     // Register Modal Texte + Input Placeholders
-const registerElements = registerModal.querySelectorAll('[data-de]');
-registerElements.forEach(el => {
-    if(el.tagName === 'INPUT') {
-        // Wenn das Input ist, übersetze das placeholder-Attribut
-        const placeholder = el.getAttribute('data-' + lang);
-        if(placeholder) el.placeholder = placeholder;
-    } else {
-        // Sonst den TextContent übersetzen
-        const text = el.getAttribute('data-' + lang);
-        if(text) el.textContent = text;
-    }
-});
-
+    const registerElements = registerModal.querySelectorAll('[data-de]');
+    registerElements.forEach(el => {
+        if(el.tagName === 'INPUT') {
+            // Wenn Input, übersetze placeholder
+            const placeholder = el.getAttribute('data-' + lang);
+            if(placeholder) el.placeholder = placeholder;
+        } else {
+            const text = el.getAttribute('data-' + lang);
+            if(text) el.textContent = text;
+        }
+    });
 
     // Übersetze auch Input Placeholder im Register Modal
     const registerPlaceholders = registerForm.querySelectorAll('input');
@@ -203,18 +201,20 @@ loginForm.addEventListener('submit', (e) => {
         ch: "Falscher Benutzername oder Passwort!"
     };
 
-    // Benutzer aus LocalStorage prüfen
     const users = JSON.parse(localStorage.getItem('users') || '{}');
 
     if(users[username] && users[username].password === password) {
         loginMessage.textContent = successText[lang];
         loginMessage.style.color = "#00ffcc";
-        
-         localStorage.setItem('currentUser', username);
-        
+
+        // Aktuellen Benutzer speichern
+        localStorage.setItem('currentUser', username);
+
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
         loginForm.reset();
+
+        updateNavUser(); // Navbar aktualisieren
     } else {
         loginMessage.textContent = errorText[lang];
         loginMessage.style.color = "#ff4c4c";
@@ -262,16 +262,10 @@ registerForm.addEventListener('submit', (e) => {
         es: "¡Las contraseñas no coinciden o el nombre de usuario ya existe!",
         ch: "Passwörter stimmen nicht überein oder Benutzername existiert schon!"
     };
-    
-const users = JSON.parse(localStorage.getItem('users') || '{}');
-    
-    if(password !== passwordConfirm || users[username]) {
-        registerMessage.textContent = errorText[lang];
-        registerMessage.style.color = "#ff4c4c";
-        return;
-    }
 
-    if(users[username]) {
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    if(password !== passwordConfirm || users[username]) {
         registerMessage.textContent = errorText[lang];
         registerMessage.style.color = "#ff4c4c";
         return;
@@ -286,18 +280,70 @@ const users = JSON.parse(localStorage.getItem('users') || '{}');
     registerForm.reset();
 });
 
-window.addEventListener('load', () => {
+// ==============================
+// Navbar aktualisieren für angemeldeten Benutzer
+// ==============================
+function updateNavUser() {
+    const loginNav = document.querySelector('nav a[href="javascript:void(0);"]');
     const currentUser = localStorage.getItem('currentUser');
+
     if(currentUser) {
-        // z.B. Button in Navbar auf „Abmelden“ ändern
-        const loginNav = document.querySelector('nav a[href="javascript:void(0);"]');
-        loginNav.textContent = "Abmelden";
-        loginNav.onclick = () => {
+        loginNav.textContent = currentUser;
+
+        // Dropdown erstellen
+        let dropdown = document.createElement('div');
+        dropdown.classList.add('user-dropdown');
+        dropdown.style.position = 'absolute';
+        dropdown.style.background = '#111';
+        dropdown.style.color = '#fff';
+        dropdown.style.padding = '10px';
+        dropdown.style.display = 'none';
+        dropdown.style.flexDirection = 'column';
+        dropdown.style.gap = '5px';
+        dropdown.style.borderRadius = '5px';
+
+        // Mein Konto
+        let accountBtn = document.createElement('button');
+        accountBtn.textContent = 'Mein Konto';
+        accountBtn.addEventListener('click', showAccount);
+        dropdown.appendChild(accountBtn);
+
+        // Abmelden
+        let logoutBtn = document.createElement('button');
+        logoutBtn.textContent = 'Abmelden';
+        logoutBtn.addEventListener('click', () => {
             localStorage.removeItem('currentUser');
             location.reload();
-        };
-    }
-});
+        });
+        dropdown.appendChild(logoutBtn);
 
+        // Dropdown zum Navbar-Link hinzufügen
+        loginNav.style.position = 'relative';
+        loginNav.appendChild(dropdown);
+
+        // Dropdown bei Klick anzeigen/ausblenden
+        loginNav.addEventListener('click', () => {
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+}
+
+// ==============================
+// „Mein Konto“ Funktion
+// ==============================
+function showAccount() {
+    const currentUser = localStorage.getItem('currentUser');
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    if(users[currentUser]) {
+        alert(`Benutzername: ${currentUser}\nPasswort: ${users[currentUser].password}`);
+    }
+}
+
+// ==============================
+// Beim Laden prüfen, ob Benutzer angemeldet ist
+// ==============================
+window.addEventListener('load', () => {
+    updateNavUser();
+});
 
 
