@@ -412,10 +412,10 @@ const logoutBtn = document.getElementById('logoutBtn');
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     if(currentUser) {
-        // Login-Link durch Benutzernamen ersetzen
+        // Login-Link zeigt jetzt Benutzernamen
         loginNav.textContent = currentUser;
         loginNav.onclick = () => {
-            // Dropdown ein/ausblenden beim Klicken auf Namen
+            // Dropdown ein/ausblenden beim Klicken auf Name
             if(userDropdown.style.display === 'none') {
                 dropdownUsername.textContent = `Benutzer: ${currentUser}`;
                 userDropdown.style.display = 'block';
@@ -425,21 +425,17 @@ function updateLoginState() {
         };
     } else {
         // Kein User angemeldet → Login-Link zurücksetzen
-        translatePage(languageSelect.value); // Übersetzung beachten
+        translatePage(languageSelect.value); // Übersetzungen für "Anmelden"
         userDropdown.style.display = 'none';
-        loginNav.onclick = openLogin;
+        loginNav.onclick = openLogin; // Wichtig: wieder Login öffnen möglich
     }
 }
 
 // Logout-Button
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('currentUser');
-    userDropdown.style.display = 'none';
-    updateLoginState();
+    updateLoginState(); // nach Logout wieder alles korrekt setzen
 });
 
 // Beim Laden prüfen, ob User angemeldet
 window.addEventListener('load', updateLoginState);
-
-
-
