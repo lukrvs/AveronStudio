@@ -198,6 +198,39 @@ if (registerHint) {
     });
 }
 
+// Öffnen Register Modal
+function openRegister() {
+    const registerModal = document.getElementById('registerModal');
+    if(!registerModal) return;
+
+    registerModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Button für Register
+const closeBtnRegister = document.querySelector('.close-btn-register');
+closeBtnRegister.addEventListener('click', () => {
+    const registerModal = document.getElementById('registerModal');
+    registerModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+// Klick außerhalb Register Modal schließen
+window.addEventListener('click', (e) => {
+    const registerModal = document.getElementById('registerModal');
+    if(e.target === registerModal) {
+        registerModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Klick auf „Noch keinen Account? Registrieren“
+const registerHint = document.querySelector('.register-hint');
+registerHint.addEventListener('click', () => {
+    loginModal.style.display = 'none';
+    openRegister();
+});
+
 
 
 
