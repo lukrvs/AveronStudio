@@ -169,3 +169,16 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
+// ==============================
+// Wechsel von Login zu Register
+// ==============================
+const registerHint = document.querySelector('.register-hint');
+
+if (registerHint) {
+    registerHint.addEventListener('click', () => {
+        loginModal.style.display = 'none';
+        openRegister(); // kommt von deinem Register-Script
+    });
+}
+
+
