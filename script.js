@@ -90,7 +90,6 @@ function translatePage(lang) {
     const registerElements = registerModal.querySelectorAll('[data-de]');
     registerElements.forEach(el => {
         if(el.tagName === 'INPUT') {
-            // Wenn Input, übersetze placeholder
             const placeholder = el.getAttribute('data-' + lang);
             if(placeholder) el.placeholder = placeholder;
         } else {
@@ -254,11 +253,11 @@ registerForm.addEventListener('submit', (e) => {
         at: "Passwörter stimmen nicht überein oder Benutzername existiert schon!",
         hu: "A jelszavak nem egyeznek vagy a felhasználónév már létezik!",
         ru: "Пароли не совпадают или имя пользователя уже существует!",
-        ja: "パスワードが一致しないか、ユーザー名 ist schon da!",
+        ja: "パスワードが一致しないか、ユーザー名 ist schon vorhanden!",
         pl: "Hasła nie zgadzają się lub nazwa użytkownika już istnieje!",
         zh: "密码不匹配或用户名已存在！",
         it: "Le password non corrispondono o il nome utente esiste già!",
-        fr: "Les mots de passe ne correspondent pas ou le nom d'utilisateur existe déjà !",
+        fr: "Les mots de passe ne correspondent pas ou l'utilisateur existiert déjà !",
         es: "¡Las contraseñas no coinciden o el nombre de usuario ya existe!",
         ch: "Passwörter stimmen nicht überein oder Benutzername existiert schon!"
     };
@@ -281,7 +280,7 @@ registerForm.addEventListener('submit', (e) => {
 });
 
 // ==============================
-// User Dropdown & Login-Namen
+// Dropdown & Login State Management
 // ==============================
 const loginNav = document.getElementById('loginNav');
 const userDropdown = document.querySelector('.user-dropdown');
@@ -296,8 +295,9 @@ function updateLoginState() {
         loginNav.textContent = currentUser;
         userDropdown.style.display = 'none';
 
-        // Dropdown bei Klick
-        loginNav.onclick = () => {
+        // Klick auf Benutzername öffnet / schließt Dropdown
+        loginNav.onclick = (e) => {
+            e.preventDefault();
             if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
                 const users = JSON.parse(localStorage.getItem('users') || '{}');
                 const userData = users[currentUser];
@@ -311,17 +311,14 @@ function updateLoginState() {
                 userDropdown.style.display = 'none';
             }
         };
-
     } else {
         loginNav.textContent = loginNav.getAttribute('data-' + lang);
         userDropdown.style.display = 'none';
-
-        // Klick öffnet Login Modal
         loginNav.onclick = openLogin;
     }
 }
 
-// Logout-Button
+// Logout
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('currentUser');
     updateLoginState();
