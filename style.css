@@ -409,5 +409,32 @@ footer {
 .register-hint:hover {
     color: #00ffcc;
 }
+.user-dropdown {
+    position: absolute;
+    top: 35px; /* unter dem Namen */
+    right: 0; /* rechtsbündig */
+    background: #222;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    min-width: 150px;
+    z-index: 1000;
+}
+.user-dropdown button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.user-dropdown button:hover {
+    background: #555;
+}
+
 
 
