@@ -416,8 +416,13 @@ function updateLoginState() {
         loginNav.textContent = currentUser;
         loginNav.onclick = () => {
             // Dropdown ein/ausblenden beim Klicken auf Name
-            if(userDropdown.style.display === 'none') {
-                dropdownUsername.textContent = `Benutzer: ${currentUser}`;
+            if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
+                // Dropdown-Inhalt setzen
+                dropdownUsername.innerHTML = `
+                    <p>Mein Konto:</p>
+                    <p>Benutzername: ${currentUser}</p>
+                    <p>Passwort: ${JSON.parse(localStorage.getItem('users'))[currentUser].password}</p>
+                `;
                 userDropdown.style.display = 'block';
             } else {
                 userDropdown.style.display = 'none';
@@ -427,7 +432,7 @@ function updateLoginState() {
         // Kein User angemeldet → Login-Link zurücksetzen
         translatePage(languageSelect.value); // Übersetzungen für "Anmelden"
         userDropdown.style.display = 'none';
-        loginNav.onclick = openLogin; // Wichtig: wieder Login öffnen möglich
+        loginNav.onclick = openLogin; // wieder Login öffnen möglich
     }
 }
 
