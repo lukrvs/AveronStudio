@@ -177,6 +177,38 @@
    data-ch="No Account? Registrieren">
    Noch keinen Account? Registrieren
 </p>
+<!-- Register Modal -->
+<div id="registerModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn-register">&times;</span>
+
+    <h2
+      data-de="Registrieren"
+      data-en="Register"
+      data-at="Registrier di"
+      data-hu="Regisztráció"
+      data-ru="Регистрация"
+      data-ja="登録"
+      data-pl="Rejestracja"
+      data-zh="注册"
+      data-it="Registrati"
+      data-fr="Inscription"
+      data-es="Registrarse"
+      data-ch="Registrieren">
+      Registrieren
+    </h2>
+
+    <form id="registerForm">
+      <input type="text" name="username" placeholder="Benutzername" required>
+      <input type="email" name="email" placeholder="E-Mail" required>
+      <input type="password" name="password" placeholder="Passwort" required>
+      <input type="password" name="passwordConfirm" placeholder="Passwort bestätigen" required>
+      <button type="submit">Registrieren</button>
+    </form>
+
+    <p id="registerMessage"></p>
+  </div>
+</div>
 
   </div>
 </div>
@@ -193,6 +225,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
