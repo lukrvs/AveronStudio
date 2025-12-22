@@ -61,15 +61,17 @@ cards.forEach(card => {
 // ==============================
 const languageSelect = document.getElementById('languageSelect');
 const loginModal = document.getElementById('loginModal');
+const registerModal = document.getElementById('registerModal');
 const loginForm = document.getElementById('loginForm');
 const loginMessage = document.getElementById('loginMessage');
-const closeBtn = loginModal.querySelector('.close-btn');
+const closeBtnLogin = loginModal.querySelector('.close-btn');
+const closeBtnRegister = registerModal.querySelector('.close-btn-register');
 
 // Alle Texte außerhalb Login Modal
-const translatableElements = document.querySelectorAll('body :not(#loginModal) [data-de]');
+const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
 
 function translatePage(lang) {
-    // Alle Texte außerhalb des Login-Modals übersetzen
+    // Alle Texte außerhalb der Modals übersetzen
     translatableElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
@@ -82,7 +84,13 @@ function translatePage(lang) {
         if(text) el.textContent = text;
     });
 
-    // Fehlermeldung zurücksetzen
+    // Register Modal Texte
+    const registerElements = registerModal.querySelectorAll('[data-de]');
+    registerElements.forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if(text) el.textContent = text;
+    });
+
     loginMessage.textContent = '';
 }
 
@@ -102,18 +110,41 @@ function openLogin() {
 }
 
 // Close Login
-loginModal.querySelector('.close-btn').addEventListener('click', () => {
+closeBtnLogin.addEventListener('click', () => {
     loginModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
+// ==============================
+// REGISTER MODAL
+// ==============================
+function openRegister() {
+    loginModal.style.display = 'none';
+    registerModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
 
 // Close Register
-registerModal.querySelector('.close-btn').addEventListener('click', () => {
+closeBtnRegister.addEventListener('click', () => {
     registerModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
+// Klick außerhalb schließen
+window.addEventListener('click', (e) => {
+    if(e.target === loginModal){
+        loginModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    if(e.target === registerModal){
+        registerModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Klick auf „Noch keinen Account? Registrieren“
+const registerHint = document.querySelector('.register-hint');
+registerHint.addEventListener('click', openRegister);
 
 // ==============================
 // Login-Formular
@@ -164,46 +195,6 @@ loginForm.addEventListener('submit', (e) => {
         loginMessage.style.color = "#ff4c4c";
     }
 });
-// ==============================
-// Wechsel von Login zu Register
-// ==============================
-
-
-// Öffnen Register Modal
-function openRegister() {
-    const registerModal = document.getElementById('registerModal');
-    if(!registerModal) return;
-
-    registerModal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-// Close Button für Register
-const closeBtnRegister = document.querySelector('.close-btn-register');
-closeBtnRegister.addEventListener('click', () => {
-    const registerModal = document.getElementById('registerModal');
-    registerModal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-});
-
-// Klick außerhalb Register Modal schließen
-window.addEventListener('click', (e) => {
-    const registerModal = document.getElementById('registerModal');
-    if(e.target === registerModal) {
-        registerModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Klick auf „Noch keinen Account? Registrieren“
-const registerHint = document.querySelector('.register-hint');
-registerHint.addEventListener('click', () => {
-    loginModal.style.display = 'none';
-    openRegister();
-});
-
-
-
 
 
 
