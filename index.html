@@ -143,18 +143,55 @@
 <div id="loginModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
-    <h2 data-de="Anmelden" data-en="Login">Login</h2>
+    <h2 
+      data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
+      data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
+      data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
+      Login
+    </h2>
     <form id="loginForm">
-      <label data-de="Benutzername" data-en="Username">Benutzername</label>
-      <input type="text" name="username" required>
-      <label data-de="Passwort" data-en="Password">Passwort</label>
-      <input type="password" name="password" required>
-      <button type="submit" data-de="Anmelden" data-en="Login">Login</button>
+      <label 
+        data-de="Benutzername" data-en="Username" data-at="Benutzername" data-hu="Felhasználónév"
+        data-ru="Имя пользователя" data-ja="ユーザー名" data-pl="Nazwa użytkownika" 
+        data-zh="用户名" data-it="Nome utente" data-fr="Nom d'utilisateur" data-es="Nombre de usuario" data-ch="Benutzername">
+        Benutzername
+      </label>
+      <input type="text" name="username" required 
+             data-de="Benutzername" data-en="Username" data-at="Benutzername" data-hu="Felhasználónév"
+             data-ru="Имя пользователя" data-ja="ユーザー名" data-pl="Nazwa użytkownika" 
+             data-zh="用户名" data-it="Nome utente" data-fr="Nom d'utilisateur" data-es="Nombre de usuario" data-ch="Benutzername"
+             placeholder="Benutzername">
+
+      <label 
+        data-de="Passwort" data-en="Password" data-at="Passwort" data-hu="Jelszó"
+        data-ru="Пароль" data-ja="パスワード" data-pl="Hasło" data-zh="密码"
+        data-it="Password" data-fr="Mot de passe" data-es="Contraseña" data-ch="Passwort">
+        Passwort
+      </label>
+      <input type="password" name="password" required
+             data-de="Passwort" data-en="Password" data-at="Passwort" data-hu="Jelszó"
+             data-ru="Пароль" data-ja="パスワード" data-pl="Hasło" data-zh="密码"
+             data-it="Password" data-fr="Mot de passe" data-es="Contraseña" data-ch="Passwort"
+             placeholder="Passwort">
+
+      <button type="submit" 
+              data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
+              data-ru="Войти" data-ja="ログイン" data-pl="Zaloguj się" data-zh="登录"
+              data-it="Accedi" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
+        Login
+      </button>
     </form>
     <p id="loginMessage"></p>
-    <p class="register-hint" data-de="Noch keinen Account? Registrieren" data-en="No account yet? Register">Noch keinen Account? Registrieren</p>
+    <p class="register-hint"
+       data-de="Noch keinen Account? Registrieren" data-en="No account yet? Register" data-at="Noch keinen Account? Registrieren" data-hu="Nincs fiókod? Regisztráció"
+       data-ru="Нет аккаунта? Регистрация" data-ja="アカウントをお持ちでないですか？ 登録" data-pl="Nie masz konta? Rejestracja"
+       data-zh="还没有账户？注册" data-it="Non hai un account? Registrati" data-fr="Pas encore de compte ? Inscription"
+       data-es="¿No tienes cuenta? Regístrate" data-ch="Noch keinen Account? Registrieren">
+       Noch keinen Account? Registrieren
+    </p>
   </div>
 </div>
+
 
 <!-- Register Modal -->
 <div id="registerModal" class="modal" style="display:none;">
@@ -216,5 +253,6 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
