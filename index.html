@@ -24,11 +24,19 @@
         <a href="#contact" data-de="Kontakt" data-en="Contact" data-at="Kontakt" data-hu="Kapcsolat"
            data-ru="Контакты" data-ja="連絡先" data-pl="Kontakt" data-zh="联系" data-it="Contatto"
            data-fr="Contact" data-es="Contacto" data-ch="Kontakt">Kontakt</a>
-        <a href="javascript:void(0);" id="loginNav" onclick="openLogin()"
-           data-de="Anmelden" data-en="Login" data-at="Ohmöden" data-hu="Bejelentkezés"
-           data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录" data-it="Accesso"
-           data-fr="Connexion" data-es="Iniciar sesión" data-ch="aameelde">Login</a>
+        <a href="javascript:void(0);" id="loginNav"
+   data-de="Anmelden" data-en="Login" data-at="Ohmöden" data-hu="Bejelentkezés"
+   data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
+   data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="aameelde">
+   Anmelden
+</a>
+<!-- Dropdown für angemeldeten User -->
+<div class="user-dropdown" style="display:none; position:absolute; background:#222; color:white; padding:10px; top:100%; left:0;">
+    <p id="dropdownUsername"></p>
+    <button id="logoutBtn">Abmelden</button>
+</div>
     </nav>
+    
     <select id="languageSelect">
         <option value="de">German</option>
         <option value="en">English</option>
@@ -250,6 +258,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
