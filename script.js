@@ -69,14 +69,18 @@ const closeBtnRegister = registerModal.querySelector('.close-btn-register');
 const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
 
 function translatePage(lang) {
-    // Alle Texte außerhalb Modals
+    // =======================
+    // Texte auf der Seite
+    // =======================
     const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
     translatableElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
+    // =======================
     // Login Modal Texte
+    // =======================
     const loginElements = loginModal.querySelectorAll('[data-de]');
     loginElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
@@ -85,7 +89,9 @@ function translatePage(lang) {
         } else if(text) el.textContent = text;
     });
 
+    // =======================
     // Register Modal Texte
+    // =======================
     const registerElements = registerModal.querySelectorAll('[data-de]');
     registerElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
@@ -93,8 +99,13 @@ function translatePage(lang) {
             if(text) el.placeholder = text;
         } else if(text) el.textContent = text;
     });
-}
 
+    // =======================
+    // Feedback-Nachrichten zurücksetzen
+    // =======================
+    loginMessage.textContent = '';
+    registerMessage.textContent = '';
+}
 
 translatePage('de');
 languageSelect.addEventListener('change', e => translatePage(e.target.value));
@@ -240,5 +251,6 @@ function updateLoginState(){
     }
 }
 window.addEventListener('load', updateLoginState);
+
 
 
