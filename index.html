@@ -25,17 +25,15 @@
            data-ru="Контакты" data-ja="連絡先" data-pl="Kontakt" data-zh="联系" data-it="Contatto"
            data-fr="Contact" data-es="Contacto" data-ch="Kontakt">Kontakt</a>
         <a href="javascript:void(0);" id="loginNav"
-   data-de="Anmelden" data-en="Login" data-at="Ohmöden" data-hu="Bejelentkezés"
+   data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
    data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
-   data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="aameelde">
+   data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
    Anmelden
 </a>
 <!-- Dropdown für angemeldeten User -->
 <div class="user-dropdown" style="display:none; position:absolute; background:#222; color:white; padding:10px; flex-direction:column; gap:5px; border-radius:5px;">
-    <button id="accountBtn">Mein Konto</button>
-    <button id="logoutBtn">Abmelden</button>
+    <!-- Buttons werden nur über JS erstellt -->
 </div>
-
 
     </nav>
     
@@ -144,9 +142,9 @@
 <div id="loginModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close-btn">&times;</span>
-    <h2 data-de="Anmelden" data-en="Login" data-at="Ohmöden" data-hu="Bejelentkezés"
+    <h2 data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
         data-ru="Вход" data-ja="ログイン" data-pl="Logowanie" data-zh="登录"
-        data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="aameelde">
+        data-it="Accesso" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
         Login
     </h2>
     <form id="loginForm">
@@ -165,9 +163,9 @@
       </label>
       <input type="password" id="password" name="password" required>
 
-      <button type="submit" data-de="Anmelden" data-en="Login" data-at="Ohmöden" data-hu="Bejelentkezés"
+      <button type="submit" data-de="Anmelden" data-en="Login" data-at="Anmelden" data-hu="Bejelentkezés"
               data-ru="Войти" data-ja="ログイン" data-pl="Zaloguj się" data-zh="登录"
-              data-it="Accedi" data-fr="Connexion" data-es="Iniciar sesión" data-ch="aameelde">
+              data-it="Accedi" data-fr="Connexion" data-es="Iniciar sesión" data-ch="Anmelden">
               Login
       </button>
     </form>
@@ -175,7 +173,7 @@
       <p class="register-hint"
    data-de="Noch keinen Account? Registrieren"
    data-en="No account yet? Register"
-   data-at="Nu koan account? Registrier di"
+   data-at="Noch keinen Account? Registrieren"
    data-hu="Nincs fiókod? Regisztráció"
    data-ru="Нет аккаунта? Регистрация"
    data-ja="アカウントをお持ちでないですか？ 登録"
@@ -187,8 +185,9 @@
    data-ch="No Account? Registrieren">
    Noch keinen Account? Registrieren
 </p>
-        </div>
-      </div>
+  </div>
+</div>
+
 <!-- Register Modal -->
 <div id="registerModal" class="modal" style="display:none;">
   <div class="modal-content">
@@ -197,7 +196,7 @@
     <h2
       data-de="Registrieren"
       data-en="Register"
-      data-at="Registrier di"
+      data-at="Registrieren"
       data-hu="Regisztráció"
       data-ru="Регистрация"
       data-ja="登録"
@@ -210,7 +209,6 @@
       Registrieren
     </h2>
 
-    
       <form id="registerForm">
   <input type="text" name="username" placeholder="Benutzername" 
          data-de="Benutzername" data-en="Username" data-at="Benutzername" 
@@ -234,53 +232,29 @@
          data-pl="Potwierdź hasło" data-zh="确认密码" data-it="Conferma Password" 
          data-fr="Confirmer le mot de passe" data-es="Confirmar contraseña" data-ch="Passwort bestätigen" required>
 
-  <button type="submit" data-de="Registrieren" data-en="Register" data-at="Registrier di" 
+  <button type="submit" data-de="Registrieren" data-en="Register" data-at="Registrieren" 
           data-hu="Regisztráció" data-ru="Регистрация" data-ja="登録" data-pl="Rejestracja" 
           data-zh="注册" data-it="Registrati" data-fr="Inscription" data-es="Registrarse" data-ch="Registrieren">
           Registrieren
   </button>
 </form>
 
-    </form>
-
     <p id="registerMessage"></p>
   </div>
 </div>
 
-    <!-- Mein Konto Modal -->
+<!-- Mein Konto Modal -->
 <div id="accountModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:10000;">
     <div style="background:#222; color:white; padding:20px; border-radius:10px; width:300px; max-width:90%; position:relative;">
         <span class="close-account" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px;">&times;</span>
         <h2>Mein Konto</h2>
-        <p><strong>Benutzername:</strong> <span id="accountUsername"></span></p>
-        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
-        <p><strong>2FA:</strong> <span id="account2FA">Nicht aktiviert</span></p>
-        <!-- Hier könnten noch Buttons kommen für 2FA aktivieren etc -->
+        <p><strong>Benutzername:</strong> <span id="accountUsernameDisplay"></span></p>
+        <p><strong>Email:</strong> <span id="accountEmailDisplay"></span></p>
+        <p><strong>2FA:</strong> <span id="account2FADisplay">Nicht aktiviert</span></p>
     </div>
 </div>
 
-
 <footer>
     <p data-de="© 2025 Averon Studio" data-en="© 2025 Averon Studio" data-at="© 2025 Averon Studio"
-       data-hu="© 2025 Averon Studio" data-ru="© 2025 Аверон Студио" data-ja="© 2025 アヴェロンスタジオ"
-       data-pl="© 2025 Averon Studio" data-zh="© 2025 Averon工作室" data-it="© 2025 Averon Studio"
-       data-fr="© 2025 Averon Studio" data-es="© 2025 Averon Studio" data-ch="© 2025 Averon Studio">
-       © 2025 Averon Studio
-    </p>
-</footer>
-    
-
-<script src="script.js"></script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
+       data-hu="© 2025 Averon Studio" data-ru="© 202
 
