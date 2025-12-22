@@ -410,31 +410,36 @@ footer {
     color: #00ffcc;
 }
 .user-dropdown {
-    position: absolute;
-    top: 35px; /* unter dem Namen */
-    right: 0; /* rechtsbündig */
-    background: #222;
-    color: #fff;
+    background: #111;             /* dunkler Hintergrund */
+    color: #fff;                  /* weiße Schrift */
     padding: 10px;
-    border-radius: 8px;
-    display: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    display: flex;
     flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    min-width: 150px;
-    z-index: 1000;
+    gap: 5px;
+    min-width: 150px;             /* Breite des Dropdowns */
+    font-size: 14px;
 }
+
 .user-dropdown button {
-    background: #333;
+    background: transparent;
     color: #fff;
     border: none;
-    padding: 8px;
-    border-radius: 5px;
+    text-align: left;
+    padding: 5px 10px;
     cursor: pointer;
+    font-size: 14px;
+    border-radius: 3px;
 }
+
 .user-dropdown button:hover {
-    background: #555;
+    background: #00ffcc;
+    color: #111;
 }
+
+}
+
 
 
 
