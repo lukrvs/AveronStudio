@@ -398,4 +398,16 @@ footer {
     font-size: 24px;
     cursor: pointer;
 }
+.register-hint {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.register-hint:hover {
+    color: #00ffcc;
+}
+
 
