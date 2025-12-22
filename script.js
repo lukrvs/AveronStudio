@@ -69,26 +69,22 @@ const registerMessage = document.getElementById('registerMessage');
 const closeBtnLogin = loginModal.querySelector('.close-btn');
 const closeBtnRegister = registerModal.querySelector('.close-btn-register');
 
-// Alle Texte außerhalb Login/Register Modal
 const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
 
 function translatePage(lang) {
-    // Alle Texte außerhalb der Modals übersetzen
     translatableElements.forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    // Login Modal Texte
-    const loginElements = loginModal.querySelectorAll('[data-de]');
-    loginElements.forEach(el => {
+    // Login Modal
+    loginModal.querySelectorAll('[data-de]').forEach(el => {
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
     });
 
-    // Register Modal Texte + Input Placeholders
-    const registerElements = registerModal.querySelectorAll('[data-de]');
-    registerElements.forEach(el => {
+    // Register Modal + Placeholders
+    registerModal.querySelectorAll('[data-de]').forEach(el => {
         if(el.tagName === 'INPUT') {
             const placeholder = el.getAttribute('data-' + lang);
             if(placeholder) el.placeholder = placeholder;
@@ -98,25 +94,15 @@ function translatePage(lang) {
         }
     });
 
-    // Übersetze auch Input Placeholder im Register Modal
-    const registerPlaceholders = registerForm.querySelectorAll('input');
-    registerPlaceholders.forEach(input => {
-        const placeholderText = input.getAttribute('data-' + lang);
-        if(placeholderText) input.placeholder = placeholderText;
-    });
-
     loginMessage.textContent = '';
     registerMessage.textContent = '';
 }
 
-// Standard: Deutsch
 translatePage('de');
-
-// Sprache wechseln
-languageSelect.addEventListener('change', (e) => translatePage(e.target.value));
+languageSelect.addEventListener('change', e => translatePage(e.target.value));
 
 // ==============================
-// LOGIN MODAL
+// LOGIN & REGISTER MODAL
 // ==============================
 function openLogin() {
     translatePage(languageSelect.value);
@@ -124,158 +110,88 @@ function openLogin() {
     document.body.style.overflow = 'hidden';
 }
 
-// Close Login
 closeBtnLogin.addEventListener('click', () => {
     loginModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
-// ==============================
-// REGISTER MODAL
-// ==============================
 function openRegister() {
     loginModal.style.display = 'none';
     registerModal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
-// Close Register
 closeBtnRegister.addEventListener('click', () => {
     registerModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
-// Klick außerhalb schließen
-window.addEventListener('click', (e) => {
-    if(e.target === loginModal){
+window.addEventListener('click', e => {
+    if(e.target === loginModal) {
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-    if(e.target === registerModal){
+    if(e.target === registerModal) {
         registerModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 });
 
-// Klick auf „Noch keinen Account? Registrieren“
-const registerHint = document.querySelector('.register-hint');
-registerHint.addEventListener('click', openRegister);
+document.querySelector('.register-hint').addEventListener('click', openRegister);
 
 // ==============================
-// LOGIN-Formular mit LocalStorage
+// LOGIN & REGISTER Funktion
 // ==============================
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', e => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;
     const lang = languageSelect.value;
-
-    const successText = {
-        de: "Login erfolgreich!",
-        en: "Login successful!",
-        at: "Login erfolgreich!",
-        hu: "Sikeres bejelentkezés!",
-        ru: "Вход успешен!",
-        ja: "ログイン成功！",
-        pl: "Logowanie udane!",
-        zh: "登录成功！",
-        it: "Login riuscito!",
-        fr: "Connexion réussie !",
-        es: "¡Inicio de sesión correcto!",
-        ch: "Login erfolgreich!"
-    };
-
-    const errorText = {
-        de: "Falscher Benutzername oder Passwort!",
-        en: "Wrong username or password!",
-        at: "Falscher Benutzername oder Passwort!",
-        hu: "Hibás felhasználónév vagy jelszó!",
-        ru: "Неверное имя пользователя или пароль!",
-        ja: "ユーザー名またはパスワード ist falsch!",
-        pl: "Niepoprawna nazwa użytkownika lub hasło!",
-        zh: "用户名或密码错误！",
-        it: "Nome utente o password errati!",
-        fr: "Nom d'utilisateur ou mot de passe incorrect !",
-        es: "¡Nombre de usuario o contraseña incorrectos!",
-        ch: "Falscher Benutzername oder Passwort!"
-    };
-
     const users = JSON.parse(localStorage.getItem('users') || '{}');
 
+    const successText = {
+        de: "Login erfolgreich!", en: "Login successful!"
+    };
+    const errorText = {
+        de: "Falscher Benutzername oder Passwort!", en: "Wrong username or password!"
+    };
+
     if(users[username] && users[username].password === password) {
-        loginMessage.textContent = successText[lang];
+        loginMessage.textContent = successText[lang] || successText.de;
         loginMessage.style.color = "#00ffcc";
-
-        // Aktuellen Benutzer speichern
         localStorage.setItem('currentUser', username);
-
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
         loginForm.reset();
-
-        updateLoginState(); // Navbar aktualisieren
+        updateLoginState();
     } else {
-        loginMessage.textContent = errorText[lang];
+        loginMessage.textContent = errorText[lang] || errorText.de;
         loginMessage.style.color = "#ff4c4c";
     }
 });
 
-// ==============================
-// REGISTER-Formular mit LocalStorage
-// ==============================
-registerForm.addEventListener('submit', (e) => {
+registerForm.addEventListener('submit', e => {
     e.preventDefault();
-
     const username = registerForm.username.value;
     const email = registerForm.email.value;
     const password = registerForm.password.value;
     const passwordConfirm = registerForm.passwordConfirm.value;
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
     const lang = languageSelect.value;
 
-    const successText = {
-        de: "Registrierung erfolgreich!",
-        en: "Registration successful!",
-        at: "Registrierung erfolgreich!",
-        hu: "Sikeres regisztráció!",
-        ru: "Регистрация успешна!",
-        ja: "登録成功！",
-        pl: "Rejestracja udana!",
-        zh: "注册成功！",
-        it: "Registrazione riuscita!",
-        fr: "Inscription réussie !",
-        es: "¡Registro exitoso!",
-        ch: "Registrierung erfolgreich!"
-    };
-
-    const errorText = {
-        de: "Passwörter stimmen nicht überein oder Benutzername existiert schon!",
-        en: "Passwords do not match or username already exists!",
-        at: "Passwörter stimmen nicht überein oder Benutzername existiert schon!",
-        hu: "A jelszavak nem egyeznek vagy a felhasználónév már létezik!",
-        ru: "Пароли не совпадают или имя пользователя уже существует!",
-        ja: "パスワードが一致しないか、ユーザー名 ist schon vorhanden!",
-        pl: "Hasła nie zgadzają się lub nazwa użytkownika już istnieje!",
-        zh: "密码不匹配或用户名已存在！",
-        it: "Le password non corrispondono o il nome utente esiste già!",
-        fr: "Les mots de passe ne correspondent pas ou l'utilisateur existiert déjà !",
-        es: "¡Las contraseñas no coinciden o el nombre de usuario ya existe!",
-        ch: "Passwörter stimmen nicht überein oder Benutzername existiert schon!"
-    };
-
-    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    const successText = { de: "Registrierung erfolgreich!", en: "Registration successful!" };
+    const errorText = { de: "Passwörter stimmen nicht überein oder Benutzername existiert schon!", en: "Passwords do not match or username already exists!" };
 
     if(password !== passwordConfirm || users[username]) {
-        registerMessage.textContent = errorText[lang];
+        registerMessage.textContent = errorText[lang] || errorText.de;
         registerMessage.style.color = "#ff4c4c";
         return;
     }
 
     users[username] = { email, password };
     localStorage.setItem('users', JSON.stringify(users));
-
-    registerMessage.textContent = successText[lang];
+    registerMessage.textContent = successText[lang] || successText.de;
     registerMessage.style.color = "#00ffcc";
-
     registerForm.reset();
 });
 
@@ -284,78 +200,56 @@ registerForm.addEventListener('submit', (e) => {
 // ==============================
 const loginNav = document.getElementById('loginNav');
 const userDropdown = document.querySelector('.user-dropdown');
-
-
-// Dropdown Positionierung
-loginNav.style.position = 'relative'; // Dropdown relativ zum Namen
-userDropdown.style.position = 'absolute';
-userDropdown.style.top = '100%';      // direkt unter dem Namen
-userDropdown.style.left = '0';        // linksbündig zum Namen
-userDropdown.style.zIndex = '1000';
-
-// Buttons erstellen
-let accountBtn = document.createElement('button');
-accountBtn.textContent = 'Mein Konto';
-accountBtn.addEventListener('click', showAccountModal);
-
-let logoutBtn = document.createElement('button');
-logoutBtn.textContent = 'Abmelden';
-logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('currentUser');
-    updateLoginState();
-});
-
-// Dropdown leeren und Buttons hinzufügen
-userDropdown.innerHTML = '';
-userDropdown.appendChild(accountBtn);
-userDropdown.appendChild(logoutBtn);
-
-// Dropdown anzeigen/ausblenden beim Klick auf den Namen
-loginNav.onclick = (e) => {
-    e.preventDefault();
-    if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
-        userDropdown.style.display = 'flex';
-    } else {
-        userDropdown.style.display = 'none';
-    }
-};
-
-
-
 const accountModal = document.getElementById('accountModal');
 const closeAccount = accountModal.querySelector('.close-account');
 const accountUsername = document.getElementById('accountUsername');
 const accountEmail = document.getElementById('accountEmail');
 const account2FA = document.getElementById('account2FA');
 
+loginNav.style.position = 'relative';
+userDropdown.style.position = 'absolute';
+userDropdown.style.top = '100%';
+userDropdown.style.left = '0';
+userDropdown.style.zIndex = '1000';
 
-
+function showAccountModal() {
+    const currentUser = localStorage.getItem('currentUser');
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    if(currentUser && users[currentUser]) {
+        accountUsername.textContent = currentUser;
+        accountEmail.textContent = users[currentUser].email;
+        account2FA.textContent = 'Nicht aktiviert';
+        accountModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
 
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     const lang = languageSelect.value;
 
+    userDropdown.innerHTML = ''; // immer neu befüllen
+
     if(currentUser) {
         loginNav.textContent = currentUser;
+
+        // Buttons erstellen
+        const accountBtn = document.createElement('button');
+        accountBtn.textContent = 'Mein Konto';
+        accountBtn.addEventListener('click', showAccountModal);
+
+        const logoutBtn = document.createElement('button');
+        logoutBtn.textContent = 'Abmelden';
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            updateLoginState();
+        });
+
+        userDropdown.appendChild(accountBtn);
+        userDropdown.appendChild(logoutBtn);
+
         userDropdown.style.display = 'none';
-
-        // Buttons nur erstellen, wenn noch nicht vorhanden
-        if(userDropdown.childElementCount === 0){
-            const accountBtn = document.createElement('button');
-            accountBtn.textContent = 'Mein Konto';
-            accountBtn.addEventListener('click', showAccountModal);
-            userDropdown.appendChild(accountBtn);
-
-            const logoutBtn = document.createElement('button');
-            logoutBtn.textContent = 'Abmelden';
-                localStorage.removeItem('currentUser');
-                updateLoginState();
-            });
-            userDropdown.appendChild(logoutBtn);
-        }
-
-        // Dropdown anzeigen/ausblenden beim Klick
-        loginNav.onclick = (e) => {
+        loginNav.onclick = e => {
             e.preventDefault();
             userDropdown.style.display = userDropdown.style.display === 'flex' ? 'none' : 'flex';
         };
@@ -366,34 +260,20 @@ function updateLoginState() {
     }
 }
 
-// Close Account Modal
+// Account Modal schließen
 closeAccount.addEventListener('click', () => {
     accountModal.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
-// Klick außerhalb Modal schließen
-accountModal.addEventListener('click', (e) => {
-    if(e.target === accountModal){
+accountModal.addEventListener('click', e => {
+    if(e.target === accountModal) {
         accountModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
 });
 
-// Logout
-logoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('currentUser');
-    updateLoginState();
-});
-
-// Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
-
-
-
-
-
-
 
 
 
