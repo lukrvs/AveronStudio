@@ -63,11 +63,13 @@ const languageSelect = document.getElementById('languageSelect');
 const loginModal = document.getElementById('loginModal');
 const registerModal = document.getElementById('registerModal');
 const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
 const loginMessage = document.getElementById('loginMessage');
+const registerMessage = document.getElementById('registerMessage');
 const closeBtnLogin = loginModal.querySelector('.close-btn');
 const closeBtnRegister = registerModal.querySelector('.close-btn-register');
 
-// Alle Texte außerhalb Login Modal
+// Alle Texte außerhalb Login/Register Modal
 const translatableElements = document.querySelectorAll('body :not(#loginModal):not(#registerModal) [data-de]');
 
 function translatePage(lang) {
@@ -91,7 +93,15 @@ function translatePage(lang) {
         if(text) el.textContent = text;
     });
 
+    // Übersetze auch Input Placeholder im Register Modal
+    const registerPlaceholders = registerForm.querySelectorAll('input');
+    registerPlaceholders.forEach(input => {
+        const placeholderText = input.getAttribute('data-' + lang);
+        if(placeholderText) input.placeholder = placeholderText;
+    });
+
     loginMessage.textContent = '';
+    registerMessage.textContent = '';
 }
 
 // Standard: Deutsch
@@ -147,7 +157,7 @@ const registerHint = document.querySelector('.register-hint');
 registerHint.addEventListener('click', openRegister);
 
 // ==============================
-// Login-Formular
+// LOGIN-Formular mit LocalStorage
 // ==============================
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -185,16 +195,82 @@ loginForm.addEventListener('submit', (e) => {
         ch: "Falscher Benutzername oder Passwort!"
     };
 
-    if(username === "test" && password === "1234") {
+    // Benutzer aus LocalStorage prüfen
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    if(users[username] && users[username].password === password) {
         loginMessage.textContent = successText[lang];
         loginMessage.style.color = "#00ffcc";
         loginModal.style.display = 'none';
         document.body.style.overflow = 'auto';
+        loginForm.reset();
     } else {
         loginMessage.textContent = errorText[lang];
         loginMessage.style.color = "#ff4c4c";
     }
 });
 
+// ==============================
+// REGISTER-Formular mit LocalStorage
+// ==============================
+registerForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
+    const username = registerForm.username.value;
+    const email = registerForm.email.value;
+    const password = registerForm.password.value;
+    const passwordConfirm = registerForm.passwordConfirm.value;
+    const lang = languageSelect.value;
 
+    const successText = {
+        de: "Registrierung erfolgreich!",
+        en: "Registration successful!",
+        at: "Registrierung erfolgreich!",
+        hu: "Sikeres regisztráció!",
+        ru: "Регистрация успешна!",
+        ja: "登録成功！",
+        pl: "Rejestracja udana!",
+        zh: "注册成功！",
+        it: "Registrazione riuscita!",
+        fr: "Inscription réussie !",
+        es: "¡Registro exitoso!",
+        ch: "Registrierung erfolgreich!"
+    };
+
+    const errorText = {
+        de: "Passwörter stimmen nicht überein oder Benutzername existiert schon!",
+        en: "Passwords do not match or username already exists!",
+        at: "Passwörter stimmen nicht überein oder Benutzername existiert schon!",
+        hu: "A jelszavak nem egyeznek vagy a felhasználónév már létezik!",
+        ru: "Пароли не совпадают или имя пользователя уже существует!",
+        ja: "パスワードが一致しないか、ユーザー名はすでに存在します！",
+        pl: "Hasła nie zgadzają się lub nazwa użytkownika już istnieje!",
+        zh: "密码不匹配或用户名已存在！",
+        it: "Le password non corrispondono o il nome utente esiste già!",
+        fr: "Les mots de passe ne correspondent pas ou le nom d'utilisateur existe déjà !",
+        es: "¡Las contraseñas no coinciden o el nombre de usuario ya existe!",
+        ch: "Passwörter stimmen nicht überein oder Benutzername existiert schon!"
+    };
+
+    if(password !== passwordConfirm) {
+        registerMessage.textContent = errorText[lang];
+        registerMessage.style.color = "#ff4c4c";
+        return;
+    }
+
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    if(users[username]) {
+        registerMessage.textContent = errorText[lang];
+        registerMessage.style.color = "#ff4c4c";
+        return;
+    }
+
+    users[username] = { email, password };
+    localStorage.setItem('users', JSON.stringify(users));
+
+    registerMessage.textContent = successText[lang];
+    registerMessage.style.color = "#00ffcc";
+
+    registerForm.reset();
+});
