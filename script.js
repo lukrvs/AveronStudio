@@ -404,24 +404,19 @@ window.addEventListener('load', () => {
 // ==============================
 // User Dropdown & Login-Namen
 // ==============================
-const loginNav = document.getElementById('loginNav');
-const userDropdown = document.querySelector('.user-dropdown');
-const dropdownUsername = document.getElementById('dropdownUsername');
-const logoutBtn = document.getElementById('logoutBtn');
-
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     if(currentUser) {
-        // Login-Link zeigt jetzt Benutzernamen
+        // Login-Link zeigt Benutzernamen
         loginNav.textContent = currentUser;
         loginNav.onclick = () => {
-            // Dropdown ein/ausblenden beim Klicken auf Name
             if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
-                // Dropdown-Inhalt setzen
+                const users = JSON.parse(localStorage.getItem('users'));
+                const userData = users[currentUser];
                 dropdownUsername.innerHTML = `
                     <p>Mein Konto:</p>
                     <p>Benutzername: ${currentUser}</p>
-                    <p>Passwort: ${JSON.parse(localStorage.getItem('users'))[currentUser].password}</p>
+                    <p>Passwort: ${userData.password}</p>
                 `;
                 userDropdown.style.display = 'block';
             } else {
@@ -429,18 +424,17 @@ function updateLoginState() {
             }
         };
     } else {
-        // Kein User angemeldet → Login-Link zurücksetzen
-        translatePage(languageSelect.value); // Übersetzungen für "Anmelden"
+        translatePage(languageSelect.value); // zurück zu „Anmelden“
         userDropdown.style.display = 'none';
-        loginNav.onclick = openLogin; // wieder Login öffnen möglich
+        loginNav.onclick = openLogin;
     }
 }
 
-// Logout-Button
+// Logout
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('currentUser');
-    updateLoginState(); // nach Logout wieder alles korrekt setzen
+    updateLoginState();
 });
 
-// Beim Laden prüfen, ob User angemeldet
+// Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
