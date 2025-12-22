@@ -293,6 +293,14 @@ const accountUsername = document.getElementById('accountUsername');
 const accountEmail = document.getElementById('accountEmail');
 const account2FA = document.getElementById('account2FA');
 
+loginNav.style.position = 'relative'; // damit das Dropdown innerhalb des Links positioniert werden kann
+userDropdown.style.position = 'absolute';
+userDropdown.style.top = '100%';   // direkt unter dem Namen
+userDropdown.style.left = '0';      // linksbündig mit dem Namen
+userDropdown.style.zIndex = '1000'; // damit es oben bleibt
+userDropdown.style.display = 'none'; // standardmäßig versteckt
+
+
 // Funktion: Dropdown-Login State
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
@@ -374,4 +382,5 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
 
