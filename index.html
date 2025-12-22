@@ -160,17 +160,43 @@
 <div id="registerModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close-btn-register">&times;</span>
-    <h2 data-de="Registrieren" data-en="Register">Registrieren</h2>
+    <h2 data-de="Registrieren" data-en="Register" data-at="Registrier di" data-hu="Regisztráció"
+        data-ru="Регистрация" data-ja="登録" data-pl="Rejestracja" data-zh="注册"
+        data-it="Registrati" data-fr="Inscription" data-es="Registrarse" data-ch="Registrieren">
+        Registrieren
+    </h2>
     <form id="registerForm">
-      <input type="text" name="username" required data-de="Benutzername" data-en="Username" placeholder="Benutzername">
-      <input type="email" name="email" required data-de="E-Mail" data-en="E-Mail" placeholder="E-Mail">
-      <input type="password" name="password" required data-de="Passwort" data-en="Password" placeholder="Passwort">
-      <input type="password" name="passwordConfirm" required data-de="Passwort bestätigen" data-en="Confirm Password" placeholder="Passwort bestätigen">
-      <button type="submit" data-de="Registrieren" data-en="Register">Registrieren</button>
+      <input type="text" name="username" required 
+             data-de="Benutzername" data-en="Username" data-at="Benutzername" data-hu="Felhasználónév"
+             data-ru="Имя пользователя" data-ja="ユーザー名" data-pl="Nazwa użytkownika" data-zh="用户名"
+             data-it="Nome utente" data-fr="Nom d'utilisateur" data-es="Nombre de usuario" data-ch="Benutzername"
+             placeholder="Benutzername">
+      <input type="email" name="email" required 
+             data-de="E-Mail" data-en="E-Mail" data-at="E-Mail" data-hu="E-mail"
+             data-ru="Эл. почта" data-ja="メール" data-pl="E-mail" data-zh="电子邮件"
+             data-it="E-mail" data-fr="E-mail" data-es="Correo electrónico" data-ch="E-Mail"
+             placeholder="E-Mail">
+      <input type="password" name="password" required
+             data-de="Passwort" data-en="Password" data-at="Passwort" data-hu="Jelszó"
+             data-ru="Пароль" data-ja="パスワード" data-pl="Hasło" data-zh="密码"
+             data-it="Password" data-fr="Mot de passe" data-es="Contraseña" data-ch="Passwort"
+             placeholder="Passwort">
+      <input type="password" name="passwordConfirm" required
+             data-de="Passwort bestätigen" data-en="Confirm Password" data-at="Passwort bestätigen" data-hu="Jelszó megerősítése"
+             data-ru="Подтвердите пароль" data-ja="パスワードを確認" data-pl="Potwierdź hasło" data-zh="确认密码"
+             data-it="Conferma Password" data-fr="Confirmer le mot de passe" data-es="Confirmar contraseña" data-ch="Passwort bestätigen"
+             placeholder="Passwort bestätigen">
+      <button type="submit"
+              data-de="Registrieren" data-en="Register" data-at="Registrier di" data-hu="Regisztráció"
+              data-ru="Регистрация" data-ja="登録" data-pl="Rejestracja" data-zh="注册"
+              data-it="Registrati" data-fr="Inscription" data-es="Registrarse" data-ch="Registrieren">
+              Registrieren
+      </button>
     </form>
     <p id="registerMessage"></p>
   </div>
 </div>
+
 
 <!-- Mein Konto Modal -->
 <div id="accountModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:10000;">
@@ -190,4 +216,5 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
