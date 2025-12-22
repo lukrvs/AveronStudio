@@ -348,7 +348,6 @@ function updateLoginState() {
 
             const logoutBtn = document.createElement('button');
             logoutBtn.textContent = 'Abmelden';
-            logoutBtn.addEventListener('click', () => {
                 localStorage.removeItem('currentUser');
                 updateLoginState();
             });
@@ -366,8 +365,6 @@ function updateLoginState() {
         loginNav.onclick = openLogin;
     }
 }
-
-});
 
 // Close Account Modal
 closeAccount.addEventListener('click', () => {
@@ -391,6 +388,7 @@ logoutBtn.addEventListener('click', () => {
 
 // Beim Laden prüfen
 window.addEventListener('load', updateLoginState);
+
 
 
 
