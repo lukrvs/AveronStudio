@@ -338,6 +338,61 @@ function showAccount() {
         alert(`Benutzername: ${currentUser}\nPasswort: ${users[currentUser].password}`);
     }
 }
+function updateNavUser() {
+    const loginNav = document.getElementById('loginNav'); // Holt den Login-Link
+    const currentUser = localStorage.getItem('currentUser');
+
+    if(currentUser && loginNav) {
+        loginNav.textContent = currentUser;
+
+        // Dropdown erstellen
+        let dropdown = document.createElement('div');
+        dropdown.classList.add('user-dropdown');
+        dropdown.style.position = 'absolute';
+        dropdown.style.background = '#111';
+        dropdown.style.color = '#fff';
+        dropdown.style.padding = '10px';
+        dropdown.style.display = 'none';
+        dropdown.style.flexDirection = 'column';
+        dropdown.style.gap = '5px';
+        dropdown.style.borderRadius = '5px';
+        dropdown.style.top = '30px'; // Abstand unter dem Namen
+        dropdown.style.left = '0';
+
+        // Mein Konto
+        let accountBtn = document.createElement('button');
+        accountBtn.textContent = 'Mein Konto';
+        accountBtn.addEventListener('click', showAccount);
+        dropdown.appendChild(accountBtn);
+
+        // Abmelden
+        let logoutBtn = document.createElement('button');
+        logoutBtn.textContent = 'Abmelden';
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            location.reload();
+        });
+        dropdown.appendChild(logoutBtn);
+
+        loginNav.style.position = 'relative';
+        loginNav.appendChild(dropdown);
+
+        loginNav.addEventListener('click', () => {
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+    }
+}
+function showAccount() {
+    const currentUser = localStorage.getItem('currentUser');
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    if(currentUser && users[currentUser]) {
+        alert(
+            `Benutzername: ${currentUser}\nPasswort: ${users[currentUser].password}`
+        );
+    } else {
+        alert('Keine Benutzerdaten gefunden.');
+    }
+}
 
 // ==============================
 // Beim Laden prüfen, ob Benutzer angemeldet ist
@@ -345,5 +400,6 @@ function showAccount() {
 window.addEventListener('load', () => {
     updateNavUser();
 });
+
 
 
