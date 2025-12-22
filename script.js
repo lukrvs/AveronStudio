@@ -86,12 +86,20 @@ function translatePage(lang) {
         if(text) el.textContent = text;
     });
 
-    // Register Modal Texte
-    const registerElements = registerModal.querySelectorAll('[data-de]');
-    registerElements.forEach(el => {
+    // Register Modal Texte + Input Placeholders
+const registerElements = registerModal.querySelectorAll('[data-de]');
+registerElements.forEach(el => {
+    if(el.tagName === 'INPUT') {
+        // Wenn das Input ist, übersetze das placeholder-Attribut
+        const placeholder = el.getAttribute('data-' + lang);
+        if(placeholder) el.placeholder = placeholder;
+    } else {
+        // Sonst den TextContent übersetzen
         const text = el.getAttribute('data-' + lang);
         if(text) el.textContent = text;
-    });
+    }
+});
+
 
     // Übersetze auch Input Placeholder im Register Modal
     const registerPlaceholders = registerForm.querySelectorAll('input');
@@ -274,3 +282,4 @@ registerForm.addEventListener('submit', (e) => {
 
     registerForm.reset();
 });
+
