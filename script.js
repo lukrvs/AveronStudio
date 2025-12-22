@@ -406,7 +406,6 @@ const userDropdown = document.querySelector('.user-dropdown');
 const dropdownUsername = document.getElementById('dropdownUsername');
 const logoutBtn = document.getElementById('logoutBtn');
 
-// Zeigt angemeldeten Benutzer oder Login-Link
 function updateLoginState() {
     const currentUser = localStorage.getItem('currentUser');
     const lang = languageSelect.value;
@@ -415,7 +414,7 @@ function updateLoginState() {
         loginNav.textContent = currentUser;
         userDropdown.style.display = 'none';
 
-        // Klick auf Benutzername öffnet Dropdown
+        // Klick auf Benutzername öffnet / schließt Dropdown
         loginNav.onclick = () => {
             if(userDropdown.style.display === 'none' || userDropdown.style.display === '') {
                 const users = JSON.parse(localStorage.getItem('users') || '{}');
@@ -430,9 +429,7 @@ function updateLoginState() {
                 userDropdown.style.display = 'none';
             }
         };
-
     } else {
-        // Kein User angemeldet
         loginNav.textContent = loginNav.getAttribute('data-' + lang);
         userDropdown.style.display = 'none';
 
@@ -440,7 +437,7 @@ function updateLoginState() {
     }
 }
 
-// Logout
+// Logout-Button
 logoutBtn.addEventListener('click', () => {
     localStorage.removeItem('currentUser');
     updateLoginState();
