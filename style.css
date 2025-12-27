@@ -125,7 +125,7 @@ nav a:hover {
 
 #hero p {
     font-size: 24px;
-    color: #ccc;
+    color: #a64ca6;
     opacity: 0;
     transform: translateY(50px);
     animation: heroFadeIn 1s ease forwards 1s;
@@ -439,6 +439,7 @@ footer {
 }
 
 }
+
 
 
 
